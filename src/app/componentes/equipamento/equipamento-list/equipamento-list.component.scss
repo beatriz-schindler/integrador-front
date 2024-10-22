@@ -1,0 +1,32 @@
+.title{
+    width: 50%;
+    display: flex;
+}
+
+.botaoNovoEquipamento{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.alinharBotoes{
+    text-align: right;
+}
+
+.btn.btn-warning{
+    margin-right: 2px;
+}
+
+.headerDashboard{
+    display: flex;
+}
+
+:host{
+    background-color: antiquewhite;
+    display: block;
+    height: 100vh;
+}
+
+:host ::ng-deep body{
+    background-color: antiquewhite;
+}

@@ -1,0 +1,23 @@
+.camposMesmaLinha{
+    display: flex;
+    width: 100%;
+}
+
+.campo1{
+    width: 50%;
+    margin-right: 1vh;
+}
+
+.campo2{
+    width: 50%;
+    margin-right: 1vh;
+}
+
+button{
+    margin-right: 1vh;
+}
+
+.btn.btn-primary{
+    background-color: lightcoral;
+    justify-content: end;
+}

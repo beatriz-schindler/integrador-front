@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Login</h3>
+          <br>
+          <form>
+            <mdb-form-control>
+              <input mdbInput type="text" id="form1" name="usuario" required class="form-control" [(ngModel)]="login.usuario" />
+              <label mdbLabel class="form-label" for="form1">Usuário</label>
+            </mdb-form-control>
+            <br>
+            <mdb-form-control>
+              <input mdbInput type="password" id="form1" name="senha" required class="form-control" [(ngModel)]="login.senha"/>
+              <label mdbLabel class="form-label" for="form1">Senha</label>
+            </mdb-form-control>
+            <br>
+            <button type="button" (click)="autenticar()" class="btn btn-primary">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <video autoplay muted loop id="video-background">
+        <source src="the-hacking-experience.mp4" type="video/mp4" />
+        Seu navegador não suporta o vídeo em HTML5.
+      </video>
+    </div>
+  </div>
+</div>

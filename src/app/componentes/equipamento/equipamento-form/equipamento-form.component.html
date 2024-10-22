@@ -1,0 +1,69 @@
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{tituloComponente}}</h3>
+                    <br>
+                    <form #newEquipamento="ngForm">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="patrimonio" name="patrimonio" class="form-control" required [(ngModel)]="equipamento.patrimonio"/>
+                            <label mdbLabel class="form-label" for="patrimonio">Patrimônio</label>
+                        </mdb-form-control>
+                        <br>
+                        <div class="camposMesmaLinha">
+                            <div class="campo1">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="marca" name="marca" class="form-control" required [(ngModel)]="equipamento.marca"/>
+                                    <label mdbLabel class="form-label" for="marca">Marca</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="campo2">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="modelo" [(ngModel)]="equipamento.modelo" required name="email" class="form-control"/>
+                                    <label mdbLabel class="form-label" for="modelo">Modelo</label>
+                                </mdb-form-control>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="camposMesmaLinha">
+                            <div class="campo1">
+                                <mdb-form-control>
+                                    <input mdbInput type="datetime" name="dataAquisicao" [(ngModel)]="equipamento.dataAquisicao" required id="dataAquisicao" class="form-control" />
+                                    <label mdbLabel class="form-label" for="dataAquisicao">Data de Aquisição</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="campo2">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="observacao" name="observacao" [(ngModel)]="equipamento.observacao" class="form-control" />
+                                    <label mdbLabel class="form-label" for="observacao">Observação</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="campo2">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Situação</option>
+                                    <option value="1">Disponível</option>
+                                    <option value="2">Em Manutenção</option>
+                                    <option value="3">Com Defeito</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <br>
+
+                        @if(equipamento.id == 0){
+                            <button [disabled]="!newEquipamento.valid" (click)="save()" class="btn btn-primary">Salvar</button>
+                        }@else{
+                            <button [disabled]="!newEquipamento.valid" (click)="update()" class="btn btn-primary">Atualizar</button>
+                        }
+                        
+                        <a href="admin/equipamento" class="btn btn-primary">Voltar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

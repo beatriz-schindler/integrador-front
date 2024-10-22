@@ -1,0 +1,9 @@
+:host{
+    background-color: antiquewhite;
+    display: block;
+    height: 100vh;
+}
+
+:host ::ng-deep body{
+    background-color: antiquewhite;
+}

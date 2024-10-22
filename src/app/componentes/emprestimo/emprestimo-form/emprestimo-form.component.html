@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+       
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Novo Empréstimo</h3>
+                        <hr>
+                    </div>
+                    <form #newEmprestimo="ngForm">
+                        <div class="camposAlinhados">
+                            <div class="img">
+                                <img src="https://mdbootstrap.com/img/new/standard/city/047.webp"
+                                class="img-fluid rounded-circle"
+                                alt=""
+                                />
+                            </div>
+                        
+                            <div class="inputs">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="form1" class="form-control" />
+                                    <label mdbLabel class="form-label" for="form1">RA do Aluno</label>
+                                </mdb-form-control>
+                                <br>
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="form1" class="form-control" />
+                                    <label mdbLabel class="form-label" for="form1">Patrimônio do Equipamento</label>
+                                </mdb-form-control>
+                                <br>
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="form1" class="form-control" style="height: 98px;" />
+                                    <label mdbLabel class="form-label" for="form1">Observação</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="inputs">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="formControlReadonly" class="form-control" [readonly]="true"/>
+                                    <label mdbLabel class="form-label" for="formControlReadonly">Nome do Aluno</label>
+                                </mdb-form-control>
+                                <br>
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="formControlReadonly" class="form-control" [readonly]="true"/>
+                                    <label mdbLabel class="form-label" for="formControlReadonly">Curso do Aluno</label>
+                                </mdb-form-control>
+                                <br>
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="formControlReadonly" class="form-control" [readonly]="true"/>
+                                    <label mdbLabel class="form-label" for="formControlReadonly">Marca do Equipamento</label>
+                                </mdb-form-control>
+                                <br>
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="formControlReadonly" class="form-control" [readonly]="true"/>
+                                    <label mdbLabel class="form-label" for="formControlReadonly">Modelo do Equipamento</label>
+                                </mdb-form-control>
+                            </div>
+                        </div>
+                        <div class="alinharBotoes">
+                            <div class="buttons">
+                                <button class="btn btn-primary">Limpar Campos</button>
+                                <button class="btn btn-success">Iniciar Empréstimo</button>
+                                <button class="btn btn-danger">Encerrar Empréstimo</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</div>

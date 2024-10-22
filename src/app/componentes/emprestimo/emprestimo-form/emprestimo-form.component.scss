@@ -1,0 +1,50 @@
+.card{
+    margin-top: 10vh;
+}
+
+.camposAlinhados{
+    display: flex;
+}
+
+.img{
+    margin-top: 3vh;
+}
+
+
+.img-fluid.rounded-circle{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+.inputs{
+    width: 35%;
+    margin-left: 6vh;
+    margin-top: 2vh;
+}
+
+.alinharBotoes{
+    margin-top: 5vh;
+    display: flex;
+    width: 100%;
+}
+
+.buttons{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn.btn-success{
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+:host{
+    background-color: antiquewhite;
+    display: block;
+    height: 100vh;
+}
+
+:host ::ng-deep body{
+    background-color: antiquewhite;
+}

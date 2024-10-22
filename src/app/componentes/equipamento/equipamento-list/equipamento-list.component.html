@@ -1,0 +1,58 @@
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                <div class="headerDashboard">
+                    <div class="title">
+                        <h3 class="card-title">Equipamentos</h3>
+                    </div>
+                    <div class="botaoNovoEquipamento">
+                        <a href="admin/equipamento/new" class="btn btn-primary">
+                            <i class="bi bi-plus-circle-fill"></i>
+                            Novo
+                        </a>
+                    </div>
+                    
+                </div>
+                <hr>
+                <br>
+                <div>
+                  <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Patrimônio</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (equipamento of lista; track $index) {
+                            <tr>
+                                @if (equipamento.ativo == 1) {
+                                    <td>{{equipamento.patrimonio}}</td>
+                                    <td>{{equipamento.marca}}</td>
+                                    <td>{{equipamento.modelo}}</td>
+                                    <td>{{equipamento.situacao}}</td>
+                                    <td class="alinharBotoes">
+                                        <a href="admin/equipamento/edit/{{equipamento.id}}" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a class="btn btn-danger"><i class="bi bi-person-x"></i></a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
