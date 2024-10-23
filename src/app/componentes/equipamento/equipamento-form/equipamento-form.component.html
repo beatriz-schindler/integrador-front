@@ -42,7 +42,7 @@
                                 </mdb-form-control>
                             </div>
                             <div class="campo2">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" (change)="getSituacao()" aria-label="Default select example">
                                     <option selected>Situação</option>
                                     <option value="1">Disponível</option>
                                     <option value="2">Em Manutenção</option>

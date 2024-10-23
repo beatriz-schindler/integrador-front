@@ -17,6 +17,7 @@ export class EquipamentoFormComponent {
 
   tituloComponente: string = "Novo Equipamento";
   equipamento: Equipamentos = new Equipamentos();
+  situacao: number =0;
 
   router = inject(Router);
   rotaAtivada = inject(ActivatedRoute);
@@ -42,6 +43,10 @@ export class EquipamentoFormComponent {
       }
     })
 
+  }
+
+  getSituacao(){
+ 
   }
 
   save(){

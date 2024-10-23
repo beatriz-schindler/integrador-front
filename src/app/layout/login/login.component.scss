@@ -1,4 +1,4 @@
-html, body {
+ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -10,25 +10,65 @@ html, body {
   position: relative;
   height: 100vh;
   width: 100%;
-  margin: 0; /* Remove margens laterais */
-
+  margin: 0;
 }
 
 #video-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* O vídeo vai preencher o container sem distorcer */
-  max-height: 100vh; /* Limita a altura do vídeo para que não ultrapasse a altura da tela */
-  max-width: 73.7%;   /* Limita a largura para que o vídeo se ajuste ao container */
-  z-index: -1; /* Coloca o vídeo no fundo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
 }
+
+.glass-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ajuste conforme necessário */
+  height: 100%; /* Ajuste conforme necessário */
+  background: rgba(255, 255, 255, 0.2); /* Cor translúcida */
+  backdrop-filter: blur(10px); /* Efeito de desfoque */
+  -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  z-index: 0; /* Abaixo do card, mas acima do vídeo */
+}
+
 .card {
-  margin-top: 30vh; /* Centraliza verticalmente */
-  margin-left: 10vh;
-  background-color: white;
+  position: relative;
+   /* Ajuste conforme necessário para centralizar */
+  background: rgba(255, 255, 255, 0.1); /* Fundo translúcido */
+  backdrop-filter: blur(10px); /* Efeito de desfoque */
+  -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-  width: 100%; /* Expande a largura do formulário */
-  max-width: 400px; /* Define um tamanho máximo */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  height: 157%;
+  max-width: 400vh; /* Define um tamanho máximo */
+  padding: 20px;
+  color: white; /* Texto branco para contraste com o fundo */
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1; /* Acima do efeito glass */
+}
+
+.card-body{
+  margin-top: 30vh;
+}
+
+ /* Adições */
+input[mdbInput] {
+  background-color: white; /* Fundo branco para os inputs */
+  color: black; /* Texto preto para contraste */
+}
+
+ 
+/* Adicione este estilo para aumentar a visibilidade dos inputs */
+input.form-control {
+  background-color: rgba(255, 255, 255, 0.9); /* Fundo mais claro e sólido */
+  color: #333; /* Cor do texto dos inputs */
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Borda mais escura para contraste */
 }
