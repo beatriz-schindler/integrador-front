@@ -1,11 +1,46 @@
-#header{
-    background-color: black;
+#header {
+    background-color: #ffffff;
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
 }
 
-.navbar-brand{
- color: white;
+ 
+
+.navbar-brand {
+    color: rgb(26, 25, 25);
+    transition: color 0.3s ease; /* Smooth transition for color change */
 }
 
-.nav-link{
-    color: white;
+.navbar-brand:hover {
+    color: #00E88F; /* Change brand color on hover */
+}
+
+.nav-link {
+    color: rgb(20, 20, 20);
+    padding: 10px 15px; /* Adiciona preenchimento para uma área de clique maior */
+    border-radius: 5px; /* Adiciona um leve arredondamento para um visual mais moderno */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave para a cor e fundo */
+}
+
+.nav-link:hover {
+
+    background: #00E88F; /* Muda a cor de fundo ao passar o mouse */
+    color: #ffffff; /* Muda a cor do texto para branco para contraste */
+    border: none; /* Remove a borda para manter a forma quadrada */
+    box-shadow: 0px 5px 0px 0px #191A23; /* Adiciona uma sombra sutil para profundidade */
+    
+    
+  /* Change link color on hover */
+}
+
+.nav-link.sair {
+    color: rgb(20, 20, 20);
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-link.sair:hover {
+    background: red; /* Muda a cor de fundo para vermelho ao passar o mouse */
+    color: #ffffff; /* Muda a cor do texto para branco para contraste */
+    box-shadow: 0px 5px 0px 0px #191A23; /* Adiciona uma sombra sutil */
 }

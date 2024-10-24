@@ -1,3 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+/* Importando a fonte Space Grotesk */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400&display=swap');
+
+/* Definindo a fonte globalmente */
+* {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+ 
+
+.card{
+  background-color: #f8f8f8;
+}

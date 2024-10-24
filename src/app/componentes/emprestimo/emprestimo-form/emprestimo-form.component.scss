@@ -1,50 +1,112 @@
-.card{
+:host {
+    background-color: #f0f0f0;
+    display: block;
+    height: 100vh;
+  }
+ 
+.card {
     margin-top: 10vh;
 }
 
-.camposAlinhados{
+.camposAlinhados {
     display: flex;
 }
 
-.img{
+.img {
     margin-top: 3vh;
 }
 
-
-.img-fluid.rounded-circle{
+.img-fluid.rounded-circle {
     border-radius: 50%;
     height: 200px;
     width: 200px;
 }
 
-.inputs{
+.inputs {
     width: 35%;
     margin-left: 6vh;
     margin-top: 2vh;
 }
 
-.alinharBotoes{
+.alinharBotoes {
     margin-top: 5vh;
     display: flex;
     width: 100%;
 }
 
-.buttons{
+.buttons {
     margin-left: auto;
     margin-right: auto;
 }
 
-.btn.btn-success{
+.btn.btn-success {
     margin-left: 2vh;
     margin-right: 2vh;
+    transition: background-color 0.3s, transform 0.3s; /* Adiciona transição suave */
 }
 
-:host{
-    background-color: antiquewhite;
-    display: block;
-    height: 100vh;
+/* Efeito hover para btn-success */
+.btn.btn-success:hover {
+    background-color: #4CAF50;
+    box-shadow: 0px 5px 0px 0px #2f6e31; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
 }
 
-:host ::ng-deep body{
-    background-color: antiquewhite;
+.btn-primary {
+    background-color: #0058e6;
+    transition: background-color 0.3s, transform 0.3s; /* Adiciona transição suave */
+}
+
+/* Efeito hover para btn-primary */
+.btn-primary:hover {
+    background-color: #0046b0;
+    box-shadow: 0px 5px 0px 0px #1e2563; /* Adiciona uma sombra sutil para profundidade */ /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
+}
+
+.btn-danger {
+    background-color: #e60058; 
+    transition: background-color 0.3s, transform 0.3s; /* Adiciona transição suave */
+}
+ 
+/* Efeito hover para btn-danger */
+.btn-danger:hover {
+    background-color: #c6004d; 
+    box-shadow: 0px 5px 0px 0px #610126;/* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
+}
+
+ 
+ 
+
+.header {
+    display: flex; /* Faz o título e o parágrafo ficarem lado a lado */
+    align-items: center; /* Centraliza verticalmente os itens */
+}
+
+.title {
+    font-size: 20px; /* Reduzir tamanho do título */
+    color: #333;
+    border-radius: 7px;
+    background: #00E88F;
+    display: inline-block; /* Para permitir o texto ficar ao lado */
+    padding: 5px 10px; /* Ajuste o padding conforme necessário */
+    box-sizing: border-box;
+    font-weight: bold; /* Deixa o texto em negrito */
+    margin-bottom: 10px; /* Espaço entre o título e o parágrafo */
+    margin-right: 20px; /* Espaço à direita do título */
+}
+
+p {
+    font-size: 15px; /* Ajuste o tamanho da fonte se necessário */
+    color: #000;
+    margin-bottom: 0; /* Remover margem inferior para evitar espaço desnecessário */
+    padding: 0; /* Remover padding para manter o parágrafo mais próximo do título */
+    text-align: left; /* Alinha o texto do parágrafo à esquerda */
+    margin-top: 0; /* Remove margem superior do parágrafo */
+}
+
+ul {
+    margin-left: 20px; /* Espaço à esquerda */
+    color: #555; /* Cor do texto */
 }

@@ -1,9 +1,37 @@
-:host{
-    background-color: antiquewhite;
+:host {
+    background-color: #f0f0f0;
     display: block;
     height: 100vh;
+  }
+
+.header {
+    display: flex; /* Faz o título e o parágrafo ficarem lado a lado */
+    align-items: center; /* Centraliza verticalmente os itens */
 }
 
-:host ::ng-deep body{
-    background-color: antiquewhite;
+.title {
+    font-size: 20px; /* Reduzir tamanho do título */
+    color: #333;
+    border-radius: 7px;
+    background: #00E88F;
+    display: inline-block; /* Para permitir o texto ficar ao lado */
+    padding: 5px 10px; /* Ajuste o padding conforme necessário */
+    box-sizing: border-box;
+    font-weight: bold; /* Deixa o texto em negrito */
+    margin-bottom: 10px; /* Espaço entre o título e o parágrafo */
+    margin-right: 20px; /* Espaço à direita do título */
+}
+
+p {
+    font-size: 15px; /* Ajuste o tamanho da fonte se necessário */
+    color: #000;
+    margin-bottom: 0; /* Remover margem inferior para evitar espaço desnecessário */
+    padding: 0; /* Remover padding para manter o parágrafo mais próximo do título */
+    text-align: left; /* Alinha o texto do parágrafo à esquerda */
+    margin-top: 0; /* Remove margem superior do parágrafo */
+}
+
+ul {
+    margin-left: 20px; /* Espaço à esquerda */
+    color: #555; /* Cor do texto */
 }
