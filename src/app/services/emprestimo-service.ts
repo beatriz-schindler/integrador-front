@@ -1,7 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Emprestimos } from "../models/emprestimos";
+import { DataService } from "./data-service";
 
 @Injectable({
     providedIn: "root"
@@ -9,6 +10,8 @@ import { Emprestimos } from "../models/emprestimos";
 export class EmprestimoService {
     http = inject(HttpClient);
     API = "http://localhost:8080/api/emprestimos";
+
+    dataService = inject(DataService);
 
     findAll(): Observable<Emprestimos[]>{
         return this.http.get<Emprestimos[]>(this.API+"/findAll");
@@ -28,5 +31,22 @@ export class EmprestimoService {
 
     encerrar(id: number, emprestimo: Emprestimos): Observable<string>{
         return this.http.put<string>(this.API+"/encerrar/"+id, emprestimo, {responseType: 'text' as 'json'});
+    }
+
+    findByFilter(dataRetirada: Date | undefined, dataDevolucao: Date | undefined, situacao: string, ra: string, usuario: string, patrimonio: string): Observable<Emprestimos[]>{
+  
+        const dataRetiradaFormatada = this.dataService.formatarDataParaSalvar(dataRetirada);
+        const dataDevolucaoFormatada = this.dataService.formatarDataParaSalvar(dataDevolucao);
+
+
+        let httpParams = new HttpParams()
+        .set('dataRetirada', dataRetiradaFormatada)
+        .set('dataDevolucao', dataDevolucaoFormatada)
+        .set('situacao', situacao)
+        .set('ra', ra)
+        .set('usuario', usuario)
+        .set('patrimonio', patrimonio);
+        
+        return this.http.get<Emprestimos[]>(`${this.API}/findByFilter`, { params: httpParams });
     }
 }

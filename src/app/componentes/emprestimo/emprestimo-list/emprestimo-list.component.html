@@ -1,8 +1,8 @@
-<br>
+<br><br><br>
 <div class="container">
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                 <div class="headerDashboard">
@@ -22,43 +22,54 @@
                     </div>    
                 </div>
                 <hr>
-                <!-- <div class="filtrosEquipamentos">
+                <div class="filtrosEquipamentos">
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput (keyup.enter)="findByModelo()" type="text" id="modelo" [(ngModel)]="modelo"  name="modelo" class="form-control"/>
-                            <label mdbLabel class="form-label" for="modelo">Modelo</label>
-                        </mdb-form-control>
-                    </div>
-                    <div class="inputs">
-                        <mdb-form-control>
-                            <input mdbInput (keyup.enter)="findByMarca()" type="text" id="marca" [(ngModel)]="marca" name="marca" class="form-control"/>
-                            <label mdbLabel class="form-label" for="marca">Marca</label>
-                        </mdb-form-control>
-                    </div>
-                    <div class="inputs">
-                        <mdb-form-control>
-                            <input mdbInput type="text" (keyup.enter)="findByPatrimonio()" id="patrimonio" [(ngModel)]="patrimonio" name="patrimonio" class="form-control"/>
+                            <input mdbInput  type="text" id="patrimonio" [(ngModel)]="patrimonio"  name="patrimonio" class="form-control"/>
                             <label mdbLabel class="form-label" for="patrimonio">Patrimônio</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
-                        <select class="form-select" [(ngModel)]="situacao" (change)="filtrar()" name="situacao" aria-label="Default select example">
+                        <mdb-form-control>
+                            <input mdbInput  type="text" id="ra" [(ngModel)]="ra" name="ra" class="form-control"/>
+                            <label mdbLabel class="form-label" for="ra">RA do Aluno</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="usuario" [(ngModel)]="usuario" name="usuario" class="form-control"/>
+                            <label mdbLabel class="form-label" for="usuario">Operador</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="dataRetirada" [(ngModel)]="dataRetirada" mask="00-00-0000" [dropSpecialCharacters]="false" name="dataRetirada" class="form-control"/>
+                            <label mdbLabel class="form-label" for="dataRetirada">Data de Retirada</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="dataDevolucao" [(ngModel)]="dataDevolucao"  mask="00-00-0000" [dropSpecialCharacters]="false" name="dataDevolucao" class="form-control"/>
+                            <label mdbLabel class="form-label" for="dataDevolucao">Data de Devolução</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <select class="form-select" [(ngModel)]="situacao"  name="situacao" aria-label="Default select example">
                             <option value="" disabled selected hidden>Selecione a Situação</option>
-                            <option value="Disponível">Disponível</option>
-                            <option value="Em Manutenção">Em Manutenção</option>
-                            <option value="Com Defeito">Com Defeito</option>
-                            <option value="Empréstimo em Andamento">Empréstimo em Andamento</option>
-                            <option value="Desativado">Desativado</option>
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Encerrado">Encerrado</option>
                         </select>
                     </div>
+                    <a class="btn btn-primary" (click)="filtrarCampos()"><i class="bi bi-search"></i></a>
                     <a class="btn btn-primary" (click)="limparCampos()"><i class="bi bi-x-circle"></i></a>
-                </div> -->
+                </div>
                 <br>
                 <div id="pdfContent">
-                    <div class="header-container">
+                    <!-- <div class="header-container">
                         <img class="logo-container" src="assets/logo.png" alt="Logo">
                         <span class="relatorio-title">RELATÓRIO DE EQUIPAMENTOS EMPRESTADOS</span>
                     </div>
+                    <br> -->
                   <table id="relatorioList" class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -100,6 +111,6 @@
             </div>
             
         </div>
-        <div class="col-md-1"></div>
+ 
     </div>
 
