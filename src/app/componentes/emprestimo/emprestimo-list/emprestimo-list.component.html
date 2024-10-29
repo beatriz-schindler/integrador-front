@@ -1,4 +1,4 @@
-<br><br><br>
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
@@ -14,10 +14,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="botaoNovoEquipamento">
-                        <a href="admin/emprestimos/new" class="btn btn-primary">
+                    <div id="imprimirRelatorio" class="botaoImprimirRelatorio">
+                        <a id="imprimirRelatorio" class="btn btn-primary" (click)="imprimirRelatorio()"> 
                             <i class="bi bi-plus-circle-fill"></i>
-                            Novo
+                            Imprimir
                         </a>
                     </div>    
                 </div>
@@ -54,8 +54,12 @@
                     <a class="btn btn-primary" (click)="limparCampos()"><i class="bi bi-x-circle"></i></a>
                 </div> -->
                 <br>
-                <div>
-                  <table class="table table-striped table-hover">
+                <div id="pdfContent">
+                    <div class="header-container">
+                        <img class="logo-container" src="assets/logo.png" alt="Logo">
+                        <span class="relatorio-title">RELATÓRIO DE EQUIPAMENTOS EMPRESTADOS</span>
+                    </div>
+                  <table id="relatorioList" class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>Patrimônio</th>

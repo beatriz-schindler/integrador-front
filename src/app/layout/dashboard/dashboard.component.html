@@ -1,64 +1,67 @@
-<br><br><br>
+<br />
 <div class="container">
-    <div class="row">
-        <div class="grafico">
-
-            <div class="col-md-1">
-                <!-- gafico 1, o maior deles. ajudar col-md e css. Grafico de barra ou de linha(tipo aqueles financeiro). 
-                 bia disse q e pra ver emprestimo por dia -->
-                <div class="card">
-                    <div class="card-body">
-                    <div class="headerDashboard">
-                        <div class="card-title">
-                            <div class="header">
-                                <div class="title">Relatório</div>
-                                <ul>
-                                    <li>Clique 'Enter' para utilizar os filtros</li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <!-- grafico 2, um pouco menor, mudar col tb. Pode ser um grafico de pizza sobre os cursos. -->
-                <div class="card">
-                    <div class="card-body">
-                    <div class="headerDashboard">
-                        <div class="card-title">
-                            <div class="header">
-                                <div class="title">Relatório</div>
-                                <ul>
-                                    <li>Clique 'Enter' para utilizar os filtros</li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-            <div class="col-md-1"> 
-                <!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio.
+	<div class="row">
+		<div class="grafico">
+			<div class="col-md-8">
+				<!-- gafico 1, o maior deles. ajudar col-md e css. Grafico de barra ou de linha 
+                (tipo aqueles financeiro) com os empréstimos por dia. -->
+				<div class="card">
+					<div class="card-body">
+						<div class="headerDashboard">
+							<div class="card-title">
+								<h3>Relatório de Empréstimos por Dia</h3>
+							</div>
+						</div>
+					</div>
+					<ngx-charts-bar-vertical
+						[view]="[700, 400]"
+						[scheme]="'vivid'"
+						[results]="emprestimosPorPatrimonio"
+						[xAxis]="true"
+						[yAxis]="true"
+						[legend]="false"
+						[showXAxisLabel]="true"
+						[showYAxisLabel]="true"
+						xAxisLabel="Equipamento"
+						yAxisLabel="Empréstimos"
+					></ngx-charts-bar-vertical>
+				</div>
+				<div class="col-md-8">
+					<!-- grafico 2, um pouco menor, mudar col tb. Pode ser um grafico de pizza sobre os cursos. -->
+					<div class="card">
+						<div class="card-body">
+							<div class="headerDashboard">
+								<div class="card-title">
+									<div class="header">
+										<div class="title">Relatório</div>
+										<ul>
+											<li>Clique 'Enter' para utilizar os filtros</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio.
                   pode ser de barrinha vertical(bia que quis assim), por mim pode ser horizontal -->
-                <div class="card">
-                    <div class="card-body">
-                    <div class="headerDashboard">
-                        <div class="card-title">
-                            <div class="header">
-                                <div class="title">Relatório</div>
-                                <ul>
-                                    <li>Clique 'Enter' para utilizar os filtros</li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
-        
-       
-    </div>
+					<div class="card">
+						<div class="card-body">
+							<div class="headerDashboard">
+								<div class="card-title">
+									<div class="header">
+										<div class="title">Relatório</div>
+										<ul>
+											<li>Clique 'Enter' para utilizar os filtros</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
