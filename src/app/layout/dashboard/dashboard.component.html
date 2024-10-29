@@ -6,7 +6,7 @@
 				<!-- gafico 1, o maior deles. ajudar col-md e css. Grafico de barra ou de linha 
                 (tipo aqueles financeiro) com os empréstimos por dia. -->
 
-				<div class="card col-md-8 big-chart">
+				<div class="card col-md-7 big-chart">
 					<div class="card-body">
 						<div class="headerDashboard">
 							<div class="card-title">
@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<ngx-charts-bar-vertical
-						[view]="[700, 400]"
+						[view]="[600, 400]"
 						[scheme]="'vivid'"
 						[results]="emprestimosPorPatrimonio"
 						[xAxis]="true"
@@ -34,22 +34,21 @@
 						<div class="card-body">
 							<div class="headerDashboard">
 								<div class="card-title">
-									<h5>Cursos Mais </h5>
+									<h5>Cursos Mais</h5>
 								</div>
 							</div>
 						</div>
 						<ngx-charts-gauge
-  [view]="[400, 215]"
-  [scheme]="'vivid'"
-  [results]="emprestimosPorcurso"
-  [legend]="true"
-  [min]="0"
-  [max]="100" 
-  [angleSpan]="240"
-  [startAngle]="-120"
-  [units]="'Empréstimos'"
-></ngx-charts-gauge>
-
+							[view]="[500, 215]"
+							[scheme]="'vivid'"
+							[results]="emprestimosPorcurso"
+							[legend]="true"
+							[min]="0"
+							[max]="100"
+							[angleSpan]="240"
+							[startAngle]="-120"
+							[units]="'Empréstimos'"
+						></ngx-charts-gauge>
 					</div>
 
 					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio. -->
@@ -62,7 +61,7 @@
 							</div>
 						</div>
 						<ngx-charts-bar-horizontal
-							[view]="[200, 115]"
+							[view]="[500, 115]"
 							[scheme]="'vivid'"
 							[results]="emprestimosPorPatrimonio"
 							[xAxis]="true"
