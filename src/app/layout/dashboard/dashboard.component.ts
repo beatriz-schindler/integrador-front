@@ -11,9 +11,17 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
 })
+
 export class DashboardComponent {
 	lista: Emprestimos[] = [];
 	emprestimosPorPatrimonio: any[] = [];
+
+	emprestimosPorcurso = [
+		{ name: 'Equipamento 1', value: 30 },
+		{ name: 'Equipamento 2', value: 250 },
+		{ name: 'Equipamento 3', value: 100 },
+		{ name: 'Equipamento 4', value: 70 }
+	  ];
 
 	view: [number, number] = [700, 400];
 	colorScheme = {

@@ -1,15 +1,16 @@
 <br />
 <div class="container">
 	<div class="row">
-		<div class="grafico">
-			<div class="col-md-8">
+		<div>
+			<div class="col-md-12 graficos-div">
 				<!-- gafico 1, o maior deles. ajudar col-md e css. Grafico de barra ou de linha 
                 (tipo aqueles financeiro) com os empréstimos por dia. -->
-				<div class="card">
+
+				<div class="card col-md-8 big-chart">
 					<div class="card-body">
 						<div class="headerDashboard">
 							<div class="card-title">
-								<h3>Relatório de Empréstimos por Dia</h3>
+								<h3>Empréstimos por Dia</h3>
 							</div>
 						</div>
 					</div>
@@ -26,39 +27,52 @@
 						yAxisLabel="Empréstimos"
 					></ngx-charts-bar-vertical>
 				</div>
-				<div class="col-md-8">
+
+				<div>
 					<!-- grafico 2, um pouco menor, mudar col tb. Pode ser um grafico de pizza sobre os cursos. -->
-					<div class="card">
+					<div class="card col-md-12 small-chart">
 						<div class="card-body">
 							<div class="headerDashboard">
 								<div class="card-title">
-									<div class="header">
-										<div class="title">Relatório</div>
-										<ul>
-											<li>Clique 'Enter' para utilizar os filtros</li>
-										</ul>
-									</div>
+									<h5>Cursos Mais </h5>
 								</div>
 							</div>
 						</div>
+						<ngx-charts-gauge
+  [view]="[400, 215]"
+  [scheme]="'vivid'"
+  [results]="emprestimosPorcurso"
+  [legend]="true"
+  [min]="0"
+  [max]="100" 
+  [angleSpan]="240"
+  [startAngle]="-120"
+  [units]="'Empréstimos'"
+></ngx-charts-gauge>
+
 					</div>
-				</div>
-				<div class="col-md-4">
-					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio.
-                  pode ser de barrinha vertical(bia que quis assim), por mim pode ser horizontal -->
-					<div class="card">
+
+					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio. -->
+					<div class="card col-md-12 small-chart">
 						<div class="card-body">
 							<div class="headerDashboard">
 								<div class="card-title">
-									<div class="header">
-										<div class="title">Relatório</div>
-										<ul>
-											<li>Clique 'Enter' para utilizar os filtros</li>
-										</ul>
-									</div>
+									<h6>Equipamentos Mais Emprestados</h6>
 								</div>
 							</div>
 						</div>
+						<ngx-charts-bar-horizontal
+							[view]="[200, 115]"
+							[scheme]="'vivid'"
+							[results]="emprestimosPorPatrimonio"
+							[xAxis]="true"
+							[yAxis]="true"
+							[legend]="false"
+							[showXAxisLabel]="true"
+							[showYAxisLabel]="true"
+							xAxisLabel="Equipamento"
+							yAxisLabel="Empréstimos"
+						></ngx-charts-bar-horizontal>
 					</div>
 				</div>
 			</div>
