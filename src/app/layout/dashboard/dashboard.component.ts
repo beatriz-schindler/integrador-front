@@ -3,6 +3,7 @@ import { EmprestimoService } from '../../services/emprestimo-service';
 import { Emprestimos } from '../../models/emprestimos';
 import Swal from 'sweetalert2';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Color, ScaleType } from '@swimlane/ngx-charts'; // Importar Color e ScaleType
 
 @Component({
 	selector: 'app-dashboard',
@@ -11,21 +12,27 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
 })
-
 export class DashboardComponent {
 	lista: Emprestimos[] = [];
 	emprestimosPorPatrimonio: any[] = [];
-
 	emprestimosPorcurso = [
 		{ name: 'Equipamento 1', value: 30 },
 		{ name: 'Equipamento 2', value: 250 },
 		{ name: 'Equipamento 3', value: 100 },
 		{ name: 'Equipamento 4', value: 70 }
-	  ];
+	];
 
 	view: [number, number] = [700, 400];
-	colorScheme = {
-		domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+	colorScheme: Color = {
+		name: 'custom',  // Adicione um nome se necessário
+		selectable: true,  // Adicione a propriedade 'selectable'
+		group: ScaleType.Ordinal,  // Use ScaleType.Ordinal
+		domain: [
+			'#00E88F',  // Cor Principal
+			'#fb7b01',  // Cor Secundária
+			'#0058e6',  // Cor Ternária
+			'#1e1e24'   // Cor Neutra
+		],
 	};
 
 	emprestimoService = inject(EmprestimoService);

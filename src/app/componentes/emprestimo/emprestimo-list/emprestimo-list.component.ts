@@ -6,19 +6,30 @@ import { EmprestimoService } from '../../../services/emprestimo-service';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
 import * as html2pdf from 'html2pdf.js';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { DataService } from '../../../services/data-service';
 
 @Component({
 	selector: 'app-emprestimo-list',
 	standalone: true,
-	imports: [FormsModule, MdbFormsModule, DatePipe],
+	imports: [FormsModule, MdbFormsModule, DatePipe, NgxMaskDirective, NgxMaskPipe],
 	templateUrl: './emprestimo-list.component.html',
 	styleUrl: './emprestimo-list.component.scss',
+	providers: [provideNgxMask()]
 })
 export class EmprestimoListComponent {
 	lista: Emprestimos[] = [];
 	emprestimo!: Emprestimos;
+	dataRetirada: Date | undefined;
+	dataDevolucao: Date | undefined;
+	situacao: string = '';
+	patrimonio: string = '';
+	ra: string = '';
+	usuario: string = '';
+
 
 	emprestimoService = inject(EmprestimoService);
+	dataService = inject(DataService);
 
 	constructor() {
 		this.findAll();
@@ -37,11 +48,25 @@ export class EmprestimoListComponent {
 		});
 	}
 
+	// Método para filtrar campos
+	filtrarCampos() {
+	
+		this.emprestimoService.findByFilter(this.dataRetirada, this.dataDevolucao, this.situacao, this.ra, this.usuario, this.patrimonio).subscribe({
+		  next: (list) => {
+			this.lista = list;
+		  },
+		  error: (erro) => {
+			console.log(erro);
+			Swal.fire("Erro", erro.error, 'error');
+		  }
+		});
+	  }
+
 	// Função para gerar o PDF
 	imprimirRelatorio() {
 		const element = document.getElementById('pdfContent');
 		const options = {
-			margin: 0.3,
+			margin: 1,
 			filename: 'relatorio.pdf',
 			image: { type: 'jpeg', quality: 0.98 },
 			html2canvas: { scale: 1, scrollY: 0 },
@@ -52,5 +77,15 @@ export class EmprestimoListComponent {
 			// Use html2pdf como uma função global
 			(window as any).html2pdf().set(options).from(element).save();
 		}
+	}
+
+	limparCampos(){
+		this.dataRetirada = undefined;
+		this.dataDevolucao = undefined;
+		this.situacao = '';
+		this.patrimonio = '';
+		this.ra = '';
+		this.usuario = '';
+		this.findAll();
 	}
 }

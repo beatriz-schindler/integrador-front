@@ -1,4 +1,4 @@
-<br />
+<br><br><br>
 <div class="container">
 	<div class="row">
 		<div>
@@ -15,6 +15,7 @@
 						</div>
 					</div>
 					<ngx-charts-bar-vertical
+<<<<<<< HEAD
 						[view]="[600, 400]"
 						[scheme]="'vivid'"
 						[results]="emprestimosPorPatrimonio"
@@ -26,6 +27,19 @@
 						xAxisLabel="Equipamento"
 						yAxisLabel="Empréstimos"
 					></ngx-charts-bar-vertical>
+=======
+					[view]="[700, 400]"
+					[scheme]="colorScheme"
+					[results]="emprestimosPorPatrimonio"
+					[xAxis]="true"
+					[yAxis]="true"
+					[legend]="false"
+					[showXAxisLabel]="true"
+					[showYAxisLabel]="true"
+					xAxisLabel="Equipamento"
+					yAxisLabel="Empréstimos"
+				></ngx-charts-bar-vertical>
+>>>>>>> 3ffb43968aad106dca372eb1a00dd4c8dcd5abb6
 				</div>
 
 				<div>
@@ -39,6 +53,7 @@
 							</div>
 						</div>
 						<ngx-charts-gauge
+<<<<<<< HEAD
 							[view]="[500, 215]"
 							[scheme]="'vivid'"
 							[results]="emprestimosPorcurso"
@@ -49,6 +64,19 @@
 							[startAngle]="-120"
 							[units]="'Empréstimos'"
 						></ngx-charts-gauge>
+=======
+  [view]="[400, 215]"
+  [scheme]="colorScheme"
+  [results]="emprestimosPorcurso"
+  [legend]="true"
+  [min]="0"
+  [max]="100" 
+  [angleSpan]="240"
+  [startAngle]="-120"
+  [units]="'Empréstimos'"
+></ngx-charts-gauge>
+
+>>>>>>> 3ffb43968aad106dca372eb1a00dd4c8dcd5abb6
 					</div>
 
 					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio. -->
@@ -61,8 +89,13 @@
 							</div>
 						</div>
 						<ngx-charts-bar-horizontal
+<<<<<<< HEAD
 							[view]="[500, 115]"
 							[scheme]="'vivid'"
+=======
+							[view]="[200, 115]"
+							[scheme]="colorScheme"
+>>>>>>> 3ffb43968aad106dca372eb1a00dd4c8dcd5abb6
 							[results]="emprestimosPorPatrimonio"
 							[xAxis]="true"
 							[yAxis]="true"
