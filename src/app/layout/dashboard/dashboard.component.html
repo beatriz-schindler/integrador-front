@@ -1,4 +1,4 @@
-<br />
+<br /><br> <br>
 <div class="container">
 	<div class="row">
 		<div>
@@ -15,17 +15,17 @@
 						</div>
 					</div>
 					<ngx-charts-bar-vertical
-						[view]="[700, 400]"
-						[scheme]="'vivid'"
-						[results]="emprestimosPorPatrimonio"
-						[xAxis]="true"
-						[yAxis]="true"
-						[legend]="false"
-						[showXAxisLabel]="true"
-						[showYAxisLabel]="true"
-						xAxisLabel="Equipamento"
-						yAxisLabel="Empréstimos"
-					></ngx-charts-bar-vertical>
+					[view]="[700, 400]"
+					[scheme]="colorScheme"
+					[results]="emprestimosPorPatrimonio"
+					[xAxis]="true"
+					[yAxis]="true"
+					[legend]="false"
+					[showXAxisLabel]="true"
+					[showYAxisLabel]="true"
+					xAxisLabel="Equipamento"
+					yAxisLabel="Empréstimos"
+				></ngx-charts-bar-vertical>
 				</div>
 
 				<div>
@@ -40,7 +40,7 @@
 						</div>
 						<ngx-charts-gauge
   [view]="[400, 215]"
-  [scheme]="'vivid'"
+  [scheme]="colorScheme"
   [results]="emprestimosPorcurso"
   [legend]="true"
   [min]="0"
@@ -63,7 +63,7 @@
 						</div>
 						<ngx-charts-bar-horizontal
 							[view]="[200, 115]"
-							[scheme]="'vivid'"
+							[scheme]="colorScheme"
 							[results]="emprestimosPorPatrimonio"
 							[xAxis]="true"
 							[yAxis]="true"
