@@ -6,12 +6,34 @@
 
 
 .botaoNovoEquipamento {
-    width: 40%;
+    // width: 10%;
     height: 35px; /* Altura do botão */
     display: flex;
     justify-content: flex-end; 
-    margin-left: 10vh;
+    margin-left: auto;
+    //margin-left: 10vh;
 }
+
+// .selectEquipamentoStatus{
+//     display: flex;
+//     width: 40%;
+//     height: 25%;   
+// }
+
+.filtrosEquipamentos{
+    display: flex;
+    justify-content: center;
+}
+
+.inputs{
+    display: flex;
+    margin-right: 2vh;
+}
+
+// .form-select{
+//     width: 60%;
+//     margin-left: auto;
+// }
 
 .btn {
     padding: 5px 10px; /* Reduzir o padding do botão */
@@ -34,6 +56,10 @@
 
 .alinharBotoes {
     text-align: right;
+}
+
+.btn.btn-primary {
+    margin-right: 2px;
 }
 
 .btn.btn-warning {

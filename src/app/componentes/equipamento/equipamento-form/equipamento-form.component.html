@@ -29,9 +29,10 @@
                         </div>
                         <br>
                         <div class="camposMesmaLinha">
-                            <div class="campo1">
+                            <div class="campo1"> 
                                 <mdb-form-control>
-                                    <input mdbInput type="datetime" name="dataAquisicao" [(ngModel)]="equipamento.dataAquisicao" required id="dataAquisicao" class="form-control" />
+                                    <input mdbInput type="datetime" name="dataAquisicao" mask="00-00-0000" [dropSpecialCharacters]="false" [(ngModel)]="equipamento.dataAquisicao" 
+                                    required id="dataAquisicao" class="form-control" />
                                     <label mdbLabel class="form-label" for="dataAquisicao">Data de Aquisição</label>
                                 </mdb-form-control>
                             </div>
@@ -42,11 +43,13 @@
                                 </mdb-form-control>
                             </div>
                             <div class="campo2">
-                                <select class="form-select" (change)="getSituacao()" aria-label="Default select example">
-                                    <option selected>Situação</option>
-                                    <option value="1">Disponível</option>
-                                    <option value="2">Em Manutenção</option>
-                                    <option value="3">Com Defeito</option>
+                                <select class="form-select" [(ngModel)]="equipamento.situacao" name="situacao" aria-label="Default select example">
+                                    <option value="Disponível">Disponível</option>
+                                    <option value="Em Manutenção">Em Manutenção</option>
+                                    <option value="Com Defeito">Com Defeito</option>
+                                    @if (equipamento.situacao === 'Desativado') {
+                                        <option value="Desativado">Desativado</option>
+                                    } 
                                 </select>
                             </div>
                             
@@ -55,7 +58,10 @@
 
                         @if(equipamento.id == 0){
                             <button [disabled]="!newEquipamento.valid" (click)="save()" class="btn btn-primary">Salvar</button>
-                        }@else{
+                        }@else if (equipamento.situacao == "Desativado") {
+                            <button [disabled]="!newEquipamento.valid" (click)="reativar()" class="btn btn-primary">Reativar</button>
+                        }
+                        @else{
                             <button [disabled]="!newEquipamento.valid" (click)="update()" class="btn btn-primary">Atualizar</button>
                         }
                         

@@ -14,4 +14,8 @@ export class AlunoService {
     findAll(): Observable<Alunos[]>{
         return this.http.get<Alunos[]>(this.API+"/findAll");
     }
+
+    findByRa(ra: string): Observable<Alunos>{
+        return this.http.get<Alunos>(`${this.API}/findByRa?ra=${ra}`);
+    }
 }

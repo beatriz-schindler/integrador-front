@@ -3,3 +3,106 @@
     display: block;
     height: 100vh;
   }
+
+
+.botaoNovoEquipamento {
+    // width: 10%;
+    height: 35px; /* Altura do botão */
+    display: flex;
+    justify-content: flex-end; 
+    margin-left: auto;
+    //margin-left: 10vh;
+}
+
+.text-red {
+    color: red;
+}
+
+// .selectEquipamentoStatus{
+//     display: flex;
+//     width: 40%;
+//     height: 25%;   
+// }
+
+.filtrosEquipamentos{
+    display: flex;
+    justify-content: center;
+}
+
+.inputs{
+    display: flex;
+    margin-right: 2vh;
+}
+
+// .form-select{
+//     width: 60%;
+//     margin-left: auto;
+// }
+
+.btn {
+    padding: 5px 10px; /* Reduzir o padding do botão */
+    font-size: 14px; /* Ajustar tamanho da fonte */
+    background-color: #00E88F; /* Cor de fundo do botão */
+    color: #000000; /* Cor do texto (branco para contraste) */
+    border: none; /* Remover bordas se necessário */
+    border-radius: 5px; /* Bordas arredondadas, ajuste conforme necessário */
+     transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave para hover */
+}
+
+.btn:hover {
+    background: #00E88F; /* Muda a cor de fundo ao passar o mouse */
+    color: #ffffff; /* Muda a cor do texto para branco para contraste */
+    border: none; /* Remove a borda para manter a forma quadrada */
+    box-shadow: 0px 5px 0px 0px #191A23; /* Cor ao passar o mouse, ajuste conforme necessário */
+}
+
+ 
+
+.alinharBotoes {
+    text-align: right;
+}
+
+.btn.btn-primary {
+    margin-right: 2px;
+}
+
+.btn.btn-warning {
+    margin-right: 2px;
+}
+
+.headerDashboard {
+    display: flex;
+}
+
+ 
+.header {
+    display: flex; /* Faz o título e o parágrafo ficarem lado a lado */
+    align-items: center; /* Centraliza verticalmente os itens */
+}
+
+.title {
+    font-size: 20px; /* Reduzir tamanho do título */
+    color: #333;
+    border-radius: 7px;
+    background: #00E88F;
+    display: inline-block; /* Para permitir o texto ficar ao lado */
+    padding: 5px 10px; /* Ajuste o padding conforme necessário */
+    box-sizing: border-box;
+    font-weight: bold; /* Deixa o texto em negrito */
+    margin-bottom: 10px; /* Espaço entre o título e o parágrafo */
+    margin-right: 20px; /* Espaço à direita do título */
+}
+
+p {
+    font-size: 15px; /* Ajuste o tamanho da fonte se necessário */
+    color: #000;
+    margin-bottom: 0; /* Remover margem inferior para evitar espaço desnecessário */
+    padding: 0; /* Remover padding para manter o parágrafo mais próximo do título */
+    text-align: left; /* Alinha o texto do parágrafo à esquerda */
+    margin-top: 0; /* Remove margem superior do parágrafo */
+}
+
+ul {
+    margin-left: 20px; /* Espaço à esquerda */
+    color: #555; /* Cor do texto */
+}

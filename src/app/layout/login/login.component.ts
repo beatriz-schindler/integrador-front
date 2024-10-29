@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario-service';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AutenticarService } from '../../services/autenticar-service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   usuario: Usuarios = new Usuarios();
   router = inject(Router);
   usuarioService = inject(UsuarioService);
+  usuarioAutenticado = inject(AutenticarService);
 
   ngOnInit() {
     this.tryPlayVideo();
@@ -44,52 +46,8 @@ export class LoginComponent implements OnInit {
   }
 
   autenticar() {
-    this.findByLogin(this.login.usuario);
+    this.usuarioAutenticado.findByLogin(this.login.usuario, this.login.senha);
   }
 
-  findByLogin(login: string) {
-    this.usuarioService.findByLogin(login).subscribe({
-      next: user => {
-        this.usuario = user;
-
-        if (this.usuario && this.usuario.senha === this.login.senha) {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "bottom-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-          Toast.fire({
-            icon: "success",
-            title: "Autenticado com sucesso!"
-          });
-          this.router.navigate(['admin/dashboard']);
-        } else {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-          Toast.fire({
-            icon: "error",
-            title: "Usuário ou senha incorretos!"
-          });
-        }
-      },
-      error: erro => {
-        alert('Deu erro');
-      }
-    });
-  }
+  
 }
