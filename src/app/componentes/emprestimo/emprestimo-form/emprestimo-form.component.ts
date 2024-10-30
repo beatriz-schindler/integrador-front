@@ -147,6 +147,7 @@ export class EmprestimoFormComponent {
       },
       error: erro => {
         Swal.fire('Erro', erro.error, 'error');
+        this.limparCampo();
       }
     });
   }
