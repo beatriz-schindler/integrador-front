@@ -1,76 +1,83 @@
-<br><br><br>
+<br>
 <div class="container">
 	<div class="row">
 		<div>
-			<div class="col-md-12 graficos-div">
-				<!-- gafico 1, o maior deles. ajudar col-md e css. Grafico de barra ou de linha 
-                (tipo aqueles financeiro) com os empréstimos por dia. -->
+			<div class="graficos-div">
+				<!-- Emprestimos por Patrimonio -->
 
-				<div class="card col-md-7 big-chart">
+				<div class="chart-field">
 					<div class="card-body">
 						<div class="headerDashboard">
-							<div class="card-title">
-								<h3>Empréstimos por Dia</h3>
+							<div class="card-title chart-option">
+								<h3>Empréstimos nos Ultimos 30 dias</h3>
+								<select mdbInput id="periodo" name="periodo" class="form-control" (change)="onPeriodoChange($event)">
+									<option value="7">7 dias</option>
+									<option value="15">15 dias</option>
+									<option value="30">30 dias</option>
+								</select>
 							</div>
 						</div>
-					</div>
-					<ngx-charts-bar-vertical
-						[view]="[600, 400]"
-						[scheme]="'vivid'"
-						[results]="emprestimosPorPatrimonio"
-						[xAxis]="true"
-						[yAxis]="true"
-						[legend]="false"
-						[showXAxisLabel]="true"
-						[showYAxisLabel]="true"
-						xAxisLabel="Equipamento"
-						yAxisLabel="Empréstimos"
-					></ngx-charts-bar-vertical>
-				</div>
-
-				<div>
-					<!-- grafico 2, um pouco menor, mudar col tb. Pode ser um grafico de pizza sobre os cursos. -->
-					<div class="card col-md-12 small-chart">
-						<div class="card-body">
-							<div class="headerDashboard">
-								<div class="card-title">
-									<h5>Cursos Mais</h5>
-								</div>
-							</div>
-						</div>
-						<ngx-charts-gauge
-							[view]="[500, 215]"
-							[scheme]="'vivid'"
-							[results]="emprestimosPorcurso"
-							[legend]="true"
-							[min]="0"
-							[max]="100"
-							[angleSpan]="240"
-							[startAngle]="-120"
-							[units]="'Empréstimos'"
-						></ngx-charts-gauge>
-					</div>
-
-					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio. -->
-					<div class="card col-md-12 small-chart">
-						<div class="card-body">
-							<div class="headerDashboard">
-								<div class="card-title">
-									<h6>Equipamentos Mais Emprestados</h6>
-								</div>
-							</div>
-						</div>
-						<ngx-charts-bar-horizontal
-							[view]="[500, 115]"
-							[scheme]="'vivid'"
-							[results]="emprestimosPorPatrimonio"
+						<br>
+						<ngx-charts-bar-vertical
+							[view]="[800, 400]"
+							[scheme]="colorScheme"
+							[results]="emprestimosPorDia"
 							[xAxis]="true"
 							[yAxis]="true"
 							[legend]="false"
 							[showXAxisLabel]="true"
 							[showYAxisLabel]="true"
 							xAxisLabel="Equipamento"
-							yAxisLabel="Empréstimos"
+							yAxisLabel="Total"
+						></ngx-charts-bar-vertical>
+					</div>
+				</div>
+
+				<div class="flex-div">
+
+					<!-- Cursos com mais Utilizações -->
+					<div class="top-chart-field">
+						<div class="card-body">
+							<div class="headerDashboard">
+								<div class="card-title">
+									<h5>Cursos com mais Utilizações</h5>
+								</div>
+							</div>
+						</div>
+						<ngx-charts-bar-horizontal
+							[view]="[450, 250]"
+							[scheme]="colorScheme"
+							[results]="emprestimosPorCurso"
+							[xAxis]="true"
+							[yAxis]="true"
+							[legend]="false"
+							[showXAxisLabel]="true"
+							[showYAxisLabel]="true"
+							xAxisLabel="Total"
+							yAxisLabel="Cursos"
+						></ngx-charts-bar-horizontal>
+					</div>
+
+					<!-- o ultimo pequeno sobre os equipamentos mais usados, fica ao seu criterio. -->
+					<div class="chart-field">
+						<div class="card-body">
+							<div class="headerDashboard">
+								<div class="card-title">
+									<h5>Equipamentos mais Emprestados</h5>
+								</div>
+							</div>
+						</div>
+						<ngx-charts-bar-horizontal
+							[view]="[450, 150]"
+							[scheme]="colorScheme"
+							[results]="emprestimosPorPatrimonio"
+							[xAxis]="true"
+							[yAxis]="true"
+							[legend]="false"
+							[showXAxisLabel]="true"
+							[showYAxisLabel]="true"
+							xAxisLabel="Total"
+							yAxisLabel="Patrimônio"
 						></ngx-charts-bar-horizontal>
 					</div>
 				</div>
