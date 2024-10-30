@@ -11,7 +11,7 @@
                             <div class="title">Equipamentos</div>
                             <ul>
                                 <li>Clique para adicionar, editar ou excluir</li>
-                                <li>Clique 'Enter' para utilizar os filtros</li> 
+                                <li>Clique no ícone da lupa para buscar o que deseja </li> 
                             </ul>
                         </div>
                     </div>
@@ -26,29 +26,28 @@
                 <div class="filtrosEquipamentos">
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput (keyup.enter)="findByModelo()" type="text" id="modelo" [(ngModel)]="modelo"  name="modelo" class="form-control"/>
+                            <input mdbInput  type="text" id="modelo" [(ngModel)]="modelo"  name="modelo" class="form-control"/>
                             <label mdbLabel class="form-label" for="modelo">Modelo</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput (keyup.enter)="findByMarca()" type="text" id="marca" [(ngModel)]="marca" name="marca" class="form-control"/>
+                            <input mdbInput type="text" id="marca" [(ngModel)]="marca" name="marca" class="form-control"/>
                             <label mdbLabel class="form-label" for="marca">Marca</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput type="text" (keyup.enter)="findByPatrimonio()" id="patrimonio" [(ngModel)]="patrimonio" name="patrimonio" class="form-control"/>
+                            <input mdbInput type="text"  id="patrimonio" [(ngModel)]="patrimonio" name="patrimonio" class="form-control"/>
                             <label mdbLabel class="form-label" for="patrimonio">Patrimônio</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
-                        <select class="form-select" [(ngModel)]="situacao" (change)="filtrar()" name="situacao" aria-label="Default select example">
+                        <select class="form-select" [(ngModel)]="situacao"  name="situacao" aria-label="Default select example">
                             <option value="" disabled selected hidden>Selecione a Situação</option>
                             <option value="Disponível">Disponível</option>
                             <option value="Em Manutenção">Em Manutenção</option>
                             <option value="Com Defeito">Com Defeito</option>
-                            <option value="Empréstimo em Andamento">Empréstimo em Andamento</option>
                             <option value="Desativado">Desativado</option>
                         </select>
                     </div>
@@ -64,6 +63,7 @@
                             <th>Marca</th>
                             <th>Modelo</th>
                             <th>Situação</th>
+                             
                         </tr>
                     </thead>
                     <tbody>

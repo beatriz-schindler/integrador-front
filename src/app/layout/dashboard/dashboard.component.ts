@@ -37,14 +37,14 @@ export class DashboardComponent {
 		domain: [
 			'#00E88F', // Verde Neon
 			'#fb7b01', // Laranja Escuro
-			'#0058e6', // Azul Royal
+			'#276a7e', // Azul Escuro
 			'#1e1e24', // Cinza Escuro
-			'#d62728', // Vermelho Carmim
+			'#e60058', // Vermelho 
 			'#9467bd', // Roxo Lavanda
-			'#8c564b', // Marrom Chocolate
-			'#e377c2', // Rosa Pastel
+			'#72b79f', // Verde cor de burro quando foge
+			'#f9d1dc', // Rosa Pastel
 			'#7f7f7f', // Cinza Médio
-			'#bcbd22', // Amarelo Mostarda
+			'#fed500', // Amarelo Normal
 		],
 	};
 

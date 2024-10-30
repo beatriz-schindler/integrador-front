@@ -39,12 +39,10 @@ export class EmprestimoFormComponent {
 
   ngOnInit() {
     this.usuario = this.usuarioAutenticado.getUsuarioAutenticado();
-    console.log("Usuário autenticado na rota do empréstimo:", this.usuario);
 
     if (this.usuario) {
       // Atribui o usuário autenticado ao empréstimo
       this.emprestimo.usuario = this.usuario;
-      console.log("Usuário atribuído ao empréstimo:", this.emprestimo.usuario);
     } else {
       console.warn("Usuário não autenticado.");
     }

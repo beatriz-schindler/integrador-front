@@ -34,9 +34,7 @@ export class AutenticarService {
                 icon: "success",
                 title: "Autenticado com sucesso!"
               });
-              console.log(this.usuario);
               localStorage.setItem('this.usuario', JSON.stringify(user)); // Salva o usuário no localStorage
-              console.log("Usuário após local storage:", this.usuario);
               this.router.navigate(['admin/dashboard']);
             } else {
               const Toast = Swal.mixin({
@@ -65,6 +63,11 @@ export class AutenticarService {
       getUsuarioAutenticado(): Usuarios | null {
         const usuarioData = localStorage.getItem('this.usuario');
         return usuarioData ? JSON.parse(usuarioData) : null;
+    }
+
+    logout(){
+      localStorage.removeItem('this.usuario');
+      this.router.navigate(['login']);
     }
 
     }
