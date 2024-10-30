@@ -65,19 +65,29 @@ export class EmprestimoListComponent {
 	// Função para gerar o PDF
 	imprimirRelatorio() {
 		const element = document.getElementById('pdfContent');
+		const header = element?.querySelector('.header-container') as HTMLElement;
+
+		// Opções para o PDF
 		const options = {
 			margin: 1,
 			filename: 'relatorio.pdf',
 			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: { scale: 1, scrollY: 0 },
+			html2canvas: { scale: 2, scrollY: 0 },
 			jsPDF: { unit: 'cm', format: 'A4', orientation: 'portrait' },
 		};
 
-		if (element) {
-			// Use html2pdf como uma função global
-			(window as any).html2pdf().set(options).from(element).save();
+		if (element && header) {
+			// Torna o header visível
+			header.style.display = 'flex';
+
+			// Gera o PDF
+			(window as any).html2pdf().set(options).from(element).save().then(() => {
+				// Restaura o estilo original
+				header.style.display = 'none';
+			});
 		}
 	}
+
 
 	limparCampos(){
 		this.dataRetirada = undefined;
