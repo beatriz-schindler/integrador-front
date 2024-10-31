@@ -61,6 +61,7 @@ export class EmprestimoListComponent {
 		  }
 		});
 	  }
+	
 
 	// Função para gerar o PDF
 	imprimirRelatorio() {
@@ -69,11 +70,11 @@ export class EmprestimoListComponent {
 
 		// Opções para o PDF
 		const options = {
-			margin: 1,
-			filename: 'relatorio.pdf',
+			margin: 0.5,
+			filename: 'relatorioEasyNote.pdf',
 			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: { scale: 2, scrollY: 0 },
-			jsPDF: { unit: 'cm', format: 'A4', orientation: 'portrait' },
+			html2canvas: { scale: 1, scrollY: 0 },
+			jsPDF: { unit: 'cm', format: 'A4', orientation: 'landscape' },
 		};
 
 		if (element && header) {
