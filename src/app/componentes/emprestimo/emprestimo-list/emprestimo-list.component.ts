@@ -38,8 +38,8 @@ export class EmprestimoListComponent {
 	findAll() {
 		this.emprestimoService.findAll().subscribe({
 			next: (list) => {
-				//Equivalente ao TRy
-				this.lista = list;
+				// Ordena a lista pela dataRetirada em ordem decrescente
+				this.lista = list.sort((a, b) => new Date(b.dataRetirada).getTime() - new Date(a.dataRetirada).getTime());
 			},
 			error: (erro) => {
 				// Equivalente ao CATCH ou EXCEPTIONS
@@ -53,7 +53,7 @@ export class EmprestimoListComponent {
 	
 		this.emprestimoService.findByFilter(this.dataRetirada, this.dataDevolucao, this.situacao, this.ra, this.usuario, this.patrimonio).subscribe({
 		  next: (list) => {
-			this.lista = list;
+			this.lista = list.sort((a, b) => new Date(b.dataRetirada).getTime() - new Date(a.dataRetirada).getTime());
 		  },
 		  error: (erro) => {
 			console.log(erro);
@@ -73,7 +73,7 @@ export class EmprestimoListComponent {
 			margin: 0.5,
 			filename: 'relatorioEasyNote.pdf',
 			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: { scale: 1, scrollY: 0 },
+			html2canvas: { scale: 3, scrollY: 0 },
 			jsPDF: { unit: 'cm', format: 'A4', orientation: 'landscape' },
 		};
 
