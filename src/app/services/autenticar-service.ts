@@ -1,102 +1,65 @@
-import { inject, Injectable } from "@angular/core";
-import { Usuarios } from "../models/usuarios";
-import { BehaviorSubject } from "rxjs";
-import { UsuarioService } from "./usuario-service";
-import Swal from "sweetalert2";
-import { Router } from "@angular/router";
+import { inject, Injectable } from '@angular/core';
+import { Usuarios } from '../models/usuarios';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UsuarioService } from './usuario-service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Login } from '../models/login';
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 @Injectable({
-    providedIn: 'root'
-  })
+	providedIn: 'root',
+})
 export class AutenticarService {
-    
-    usuario: Usuarios = new Usuarios();
-    usuarioService = inject(UsuarioService);
-    router = inject(Router);
+	http = inject(HttpClient);
+	API = 'http://localhost:8080/api/usuarios';
 
-    findByLogin(login: string, senha: string) {
-        this.usuarioService.findByLogin(login, senha).subscribe({
-          next: user => {
-            this.usuario = user;
-            if (this.usuario && this.usuario.senha === senha) {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "bottom-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "success",
-                title: "Autenticado com sucesso!"
-              });
-              localStorage.setItem('this.usuario', JSON.stringify(user)); // Salva o usuário no localStorage
-              this.router.navigate(['admin/dashboard']);
-            } else {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "error",
-                title: "Usuário ou senha incorretos!"
-              });
-            }
-          },
-          error: erro => {
-            Swal.fire('Erro', erro.error, 'error');
-          }
-        });
-      }
+	usuario: Usuarios = new Usuarios();
+	usuarioService = inject(UsuarioService);
+	router = inject(Router);
 
-      getUsuarioAutenticado(): Usuarios | null {
-        const usuarioData = localStorage.getItem('this.usuario');
-        return usuarioData ? JSON.parse(usuarioData) : null;
+	login(login: Login): Observable<string> {
+		return this.http.post<string>(this.API + '/login', login, { responseType: 'text' as 'json' });
+	}
+
+	getUsuarioAutenticado(): Usuarios | null {
+    let user = this.jwtDecode() as Usuarios;
+    return user;
+
+	}
+
+	logout() {
+		localStorage.removeItem('token');
+		this.router.navigate(['login']);
+	}
+
+  addToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  removerToken() {
+    localStorage.removeItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  jwtDecode() {
+    let token = this.getToken();
+    if (token) {
+      return jwtDecode<JwtPayload>(token);
     }
+    return "";
+  }
 
-    logout(){
-      localStorage.removeItem('this.usuario');
-      this.router.navigate(['login']);
-    }
+  hasPermission(role: string) {
+    let user = this.jwtDecode() as Usuarios;
+    if (user.role == role)
+      return true;
+    else
+      return false;
+  }
 
-    }
-
-    // setUsuario(usuario: Usuarios): Promise<void> {
-    //     return new Promise((resolve, reject) => {
-    //         if (!usuario || !usuario.id) {
-    //             console.error('Usuário ou ID inválido:', usuario);
-    //             reject('Usuário ou ID inválido');
-    //             return;
-    //         }
-    
-    //         this.usuarioService.findById(usuario.id).subscribe({
-    //             next: user => {
-    //                 console.log('Usuário encontrado:', user);
-    //                 this.usuario = user;
-    //                 resolve();
-    //             },
-    //             error: erro => {
-    //                 console.error('Erro ao buscar usuário:', erro);
-    //                 reject(erro);
-    //             }
-    //         });
-    //     });
-    // }
-    
-    
-    // getUsuario(): Usuarios{
-    //     console.log("Usuário recuperado:", this.usuario); 
-    //     return this.usuario;
-    // }
-
+}

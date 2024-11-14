@@ -5,11 +5,13 @@ import Swal from 'sweetalert2';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Color, ScaleType } from '@swimlane/ngx-charts'; // Importar Color e ScaleType
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
 	selector: 'app-dashboard',
 	standalone: true,
-	imports: [NgxChartsModule, MdbFormsModule],
+	imports: [NgxChartsModule, MdbFormsModule, DatePipe],
+	providers: [DatePipe],
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
 })
@@ -22,6 +24,8 @@ export class DashboardComponent {
 	emprestimosPorDia: any[] = []; // Adicione esta linha
 
 	periodoSelecionado: number = 7; // Período padrão (30 dias)
+
+	datePipe = inject(DatePipe);
 
 	// Adicione este método ao seu componente
 	onPeriodoChange(event: Event) {
@@ -125,7 +129,10 @@ export class DashboardComponent {
 		this.lista.forEach((emprestimo) => {
 			const dataEmprestimo = new Date(emprestimo.dataRetirada);
 			if (dataEmprestimo >= diasAtras && dataEmprestimo <= hoje) {
-				const dataFormatada = dataEmprestimo.toISOString().split('T')[0];
+				let dataFormatada = '';
+				let dataFormatadaNova = this.datePipe.transform(emprestimo.dataRetirada, 'dd-MM-yyyy');
+				if(dataFormatadaNova)
+					dataFormatada = dataFormatadaNova;
 				diaCountMap.set(dataFormatada, (diaCountMap.get(dataFormatada) || 0) + 1);
 			}
 		});

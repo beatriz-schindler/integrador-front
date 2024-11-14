@@ -4,4 +4,5 @@ export class Usuarios {
     cpf!: string;
     login!: string;
     senha!: string;
+    role!: string;
 }

@@ -11,9 +11,7 @@ export class UsuarioService {
     http = inject(HttpClient);
     API = "http://localhost:8080/api/usuarios";
 
-    findByLogin(login: string, senha: string): Observable<Usuarios> {
-        return this.http.get<Usuarios>(`${this.API}/findByLogin?login=${login}`);
-    }
+   
 
     findById(id: number): Observable<Usuarios>{
         return this.http.get<Usuarios>(this.API+"/findById/"+id);

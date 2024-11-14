@@ -23,9 +23,10 @@ export class LoginComponent implements OnInit {
   usuario: Usuarios = new Usuarios();
   router = inject(Router);
   usuarioService = inject(UsuarioService);
-  usuarioAutenticado = inject(AutenticarService);
+  autenticarService = inject(AutenticarService);
 
   ngOnInit() {
+    this.autenticarService.logout();
     this.tryPlayVideo();
   }
 
@@ -46,7 +47,51 @@ export class LoginComponent implements OnInit {
   }
 
   autenticar() {
-    this.usuarioAutenticado.findByLogin(this.login.usuario, this.login.senha);
+    this.autenticarService.login(this.login).subscribe({
+      next: token => {
+        this.autenticarService.addToken(token);
+        this.router.navigate(['admin/dashboard']);
+        // this.usuario = user;
+        // if (this.usuario && this.usuario.senha === senha) {
+        //   const Toast = Swal.mixin({
+        //     toast: true,
+        //     position: "bottom-end",
+        //     showConfirmButton: false,
+        //     timer: 3000,
+        //     timerProgressBar: true,
+        //     didOpen: (toast) => {
+        //       toast.onmouseenter = Swal.stopTimer;
+        //       toast.onmouseleave = Swal.resumeTimer;
+        //     }
+        //   });
+        //   Toast.fire({
+        //     icon: "success",
+        //     title: "Autenticado com sucesso!"
+        //   });
+        //   localStorage.setItem('this.usuario', JSON.stringify(user)); // Salva o usuário no localStorage
+        //   this.router.navigate(['admin/dashboard']);
+        // } else {
+        //   const Toast = Swal.mixin({
+        //     toast: true,
+        //     position: "top-end",
+        //     showConfirmButton: false,
+        //     timer: 3000,
+        //     timerProgressBar: true,
+        //     didOpen: (toast) => {
+        //       toast.onmouseenter = Swal.stopTimer;
+        //       toast.onmouseleave = Swal.resumeTimer;
+        //     }
+        //   });
+        //   Toast.fire({
+        //     icon: "error",
+        //     title: "Usuário ou senha incorretos!"
+        //   });
+       // }
+      },
+      error: erro => {
+        Swal.fire('Erro', erro.error, 'error');
+      }
+    });
   }
 
   
