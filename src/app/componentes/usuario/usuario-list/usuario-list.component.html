@@ -1,1 +1,99 @@
-<p>usuario-list works!</p>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                <div class="headerDashboard">
+                    <div class="card-title">
+                        <div class="header">
+                            <div class="title">Usuários</div>
+                            <ul>
+                                <li>Clique para adicionar, editar ou excluir</li>
+                                <li>Clique no ícone da lupa para buscar o que deseja </li> 
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="botaoNovoEquipamento">
+                        <a href="admin/usuario/new" class="btn btn-primary">
+                            <i class="bi bi-plus-circle-fill"></i>
+                            Novo
+                        </a>
+                    </div>    
+                </div>
+                <hr>
+                <!-- <div class="filtrosEquipamentos">
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput  type="text" id="modelo" [(ngModel)]="modelo"  name="modelo" class="form-control"/>
+                            <label mdbLabel class="form-label" for="modelo">Modelo</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="marca" [(ngModel)]="marca" name="marca" class="form-control"/>
+                            <label mdbLabel class="form-label" for="marca">Marca</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text"  id="patrimonio" [(ngModel)]="patrimonio" name="patrimonio" class="form-control"/>
+                            <label mdbLabel class="form-label" for="patrimonio">Patrimônio</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <select class="form-select" [(ngModel)]="situacao"  name="situacao" aria-label="Default select example">
+                            <option value="" disabled selected hidden>Selecione a Situação</option>
+                            <option value="Disponível">Disponível</option>
+                            <option value="Em Manutenção">Em Manutenção</option>
+                            <option value="Com Defeito">Com Defeito</option>
+                            <option value="Desativado">Desativado</option>
+                        </select>
+                    </div>
+                    <a class="btn btn-primary" (click)="filtrarCampos()"><i class="bi bi-search"></i></a>
+                    <a class="btn btn-primary" (click)="limparCampos()"><i class="bi bi-x-circle"></i></a>
+                </div> -->
+                <br>
+                <div>
+                  <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Função</th>
+                            <th>Situação</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (usuario of lista; track $index) {
+                            @if (usuario.ativo == true) {
+                                <tr>
+                                    <td>{{usuario.nome}}</td>
+                                    <td>{{usuario.cpf}}</td>
+                                    <td>{{usuario.role}}</td>
+                                    <td>ATIVO</td>
+                                                                   
+                                    <td class="alinharBotoes">
+                                        <a href="admin/usuario/edit/{{usuario.id}}" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a class="btn btn-danger"><i class="bi bi-x-octagon"></i></a>
+                                    </td>   
+                                </tr>
+                            }  
+                        }
+                    </tbody>
+                  </table>
+                  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  <div>
+                    Página: {{ p }}
+                  </div> -->
+                </div>
+            </div>
+            </div>
+            
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+

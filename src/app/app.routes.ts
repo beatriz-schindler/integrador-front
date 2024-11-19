@@ -7,7 +7,6 @@ import { EquipamentoFormComponent } from './componentes/equipamento/equipamento-
 import { EmprestimoListComponent } from './componentes/emprestimo/emprestimo-list/emprestimo-list.component';
 import { EmprestimoFormComponent } from './componentes/emprestimo/emprestimo-form/emprestimo-form.component';
 import { AlunoListComponent } from './componentes/aluno/aluno-list/aluno-list.component';
-import { guardaGuard } from './auth/guarda.guard';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
@@ -20,5 +19,8 @@ export const routes: Routes = [
         {path: "relatorio", component: EmprestimoListComponent},
         {path: "emprestimo/new", component: EmprestimoFormComponent},
         {path: "aluno", component: AlunoListComponent},
+        {path: "usuario", component: UsuarioListComponent},
+        {path: "usuario/new", component: UsuarioFormComponent},
+        {path: "usuario/edit/:id", component: UsuarioFormComponent},
     ]}
 ];
