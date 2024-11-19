@@ -5,4 +5,5 @@ export class Usuarios {
     login!: string;
     senha!: string;
     role!: string;
+    ativo!: boolean;
 }

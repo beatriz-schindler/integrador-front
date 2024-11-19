@@ -19,7 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class EquipamentoFormComponent {
 
-  tituloComponente: string = "Novo Equipamento";
+  tituloComponente: string = "Novo Equipamento"; 
   equipamento: Equipamentos = new Equipamentos();
   situacaoAtual: string = '';
   

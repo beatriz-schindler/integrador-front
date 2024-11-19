@@ -1,1 +1,63 @@
-<p>usuario-form works!</p>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{tituloComponente}}</h3>
+                    <br>
+                    <form #newUsuario="ngForm">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="nome" name="nome" class="form-control" required [(ngModel)]="usuario.nome"/>
+                            <label mdbLabel class="form-label" for="nome">Nome</label>
+                        </mdb-form-control>
+                        <br>
+                        <div class="camposMesmaLinha">
+                            <div class="campo1">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="cpf" name="cpf" mask="000.000.000-00" [dropSpecialCharacters]="false" class="form-control" required [(ngModel)]="usuario.cpf"/>
+                                    <label mdbLabel class="form-label" for="cpf">CPF</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="campo2">
+                                <select class="form-select" [(ngModel)]="usuario.role" name="role" aria-label="Default select example">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Colaborador">Colaborador</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="camposMesmaLinha">
+                            <div class="campo1"> 
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="login" name="login" class="form-control" required [(ngModel)]="usuario.login"/>
+                                    <label mdbLabel class="form-label" for="login">Login</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="campo2">
+                                <mdb-form-control>
+                                    <input mdbInput type="password" id="senha" name="senha" class="form-control" required [(ngModel)]="usuario.senha"/>
+                                    <label mdbLabel class="form-label" for="senha">Senha</label>
+                                </mdb-form-control>
+                            </div>
+                            </div>
+                        <br>
+
+                        @if(usuario.id == 0){
+                            <button [disabled]="!newUsuario.valid" (click)="save()" class="btn btn-primary">Salvar</button>
+                        }@else if (usuario.ativo == false) {
+                            <button [disabled]="!newUsuario.valid" (click)="reativar()" class="btn btn-primary">Reativar</button>
+                        }
+                        @else{
+                            <button [disabled]="!newUsuario.valid" (click)="update()" class="btn btn-primary">Atualizar</button>
+                        }
+                        
+                        <a href="admin/usuario" class="btn btn-primary">Voltar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

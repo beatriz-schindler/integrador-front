@@ -55,7 +55,7 @@ export class EmprestimoFormComponent {
           this.aluno = aluno;
         } else {
           this.resetAlunoFields(); // Limpa os campos caso o aluno não seja encontrado
-          console.log("Aluno não encontrado");
+          Swal.fire("Erro", "Aluno não encontrado!", 'error');
         }
       },
       error: erro => {
@@ -96,7 +96,7 @@ export class EmprestimoFormComponent {
                         this.equipamento = equipamento;
                       } else {
                         this.resetEquipamentoFields(); // Limpa os campos caso o equipamento não seja encontrado
-                        console.log("Equipamento não encontrado!");
+                        Swal.fire("Erro", "Equipamento não encontrado!", 'error');
                       }
                     },
                     (error) => {
@@ -129,10 +129,6 @@ export class EmprestimoFormComponent {
   iniciarEmprestimo(){
     this.emprestimo.aluno = this.aluno;
     this.emprestimo.equipamento = this.equipamento;
-
-
-    console.log(this.emprestimo);
-
     this.emprestimoService.save(this.emprestimo).subscribe({
       next: mensagem => {
         Swal.fire({
@@ -140,7 +136,7 @@ export class EmprestimoFormComponent {
           icon: "success"
         }).then(() => {
           this.limparCampo();
-          this.router.navigate(['admin/emprestimo/new']);
+          //this.router.navigate(['admin/emprestimo/new']);
         });
       },
       error: erro => {
@@ -161,7 +157,7 @@ export class EmprestimoFormComponent {
           icon: "success"
         }).then(() => {
           this.limparCampo();
-          this.router.navigate(['admin/emprestimo/new']);
+          //this.router.navigate(['admin/emprestimo/new']);
         });
       },
       error: erro => {
@@ -178,6 +174,7 @@ export class EmprestimoFormComponent {
     this.equipamento.modelo = '';
     this.equipamento.marca = '';
     this.emprestimo.observacao = '';
+    this.emprestimoEncontrado = false;
   }
 
 }
