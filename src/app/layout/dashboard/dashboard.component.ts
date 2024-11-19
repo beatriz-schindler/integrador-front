@@ -59,6 +59,7 @@ export class DashboardComponent {
 	}
 
 	findAll() {
+		.0
 		this.emprestimoService.findAll().subscribe({
 			next: (list) => {
 				this.lista = list;

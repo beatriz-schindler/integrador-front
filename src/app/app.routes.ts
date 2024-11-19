@@ -7,11 +7,12 @@ import { EquipamentoFormComponent } from './componentes/equipamento/equipamento-
 import { EmprestimoListComponent } from './componentes/emprestimo/emprestimo-list/emprestimo-list.component';
 import { EmprestimoFormComponent } from './componentes/emprestimo/emprestimo-form/emprestimo-form.component';
 import { AlunoListComponent } from './componentes/aluno/aluno-list/aluno-list.component';
+import { guardaGuard } from './auth/guarda.guard';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
     {path: "login", component: LoginComponent},
-    {path:"admin", component: PrincipalComponent, children:[
+    {path:"admin", component: PrincipalComponent, canActivate: [guardaGuard], children:[
         {path: "dashboard", component: DashboardComponent},
         {path: "equipamento", component: EquipamentoListComponent},
         {path: "equipamento/new", component: EquipamentoFormComponent},

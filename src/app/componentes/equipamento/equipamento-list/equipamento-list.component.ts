@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-equipamento-list',
@@ -23,6 +24,8 @@ export class EquipamentoListComponent {
   p: number = 1;
 
   equipamentoService = inject(EquipamentoService);
+
+  loginService = inject(LoginService);
 
   constructor(){
     this.findAll();

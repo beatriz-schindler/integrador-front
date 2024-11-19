@@ -15,12 +15,14 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="botaoNovoEquipamento">
-                        <a href="admin/equipamento/new" class="btn btn-primary">
-                            <i class="bi bi-plus-circle-fill"></i>
-                            Novo
-                        </a>
-                    </div>    
+                    @if(loginService.hasPermission("Admin")){
+                        <div class="botaoNovoEquipamento">
+                            <a href="admin/equipamento/new" class="btn btn-primary">
+                                <i class="bi bi-plus-circle-fill"></i>
+                                Novo
+                            </a>
+                        </div> 
+                    }   
                 </div>
                 <hr>
                 <div class="filtrosEquipamentos">
@@ -73,12 +75,14 @@
                                 <td>{{equipamento.marca}}</td>
                                 <td>{{equipamento.modelo}}</td>
                                 <td>{{equipamento.situacao}}</td>
-                                <td class="alinharBotoes">
-                                    <a href="admin/equipamento/edit/{{equipamento.id}}" class="btn btn-warning">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <a class="btn btn-danger" (click)="desativar(equipamento.patrimonio)"><i class="bi bi-x-octagon"></i></a>
-                                </td>   
+                                @if(loginService.hasPermission("Admin")){
+                                    <td class="alinharBotoes">
+                                        <a href="admin/equipamento/edit/{{equipamento.id}}" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a class="btn btn-danger" (click)="desativar(equipamento.patrimonio)"><i class="bi bi-x-octagon"></i></a>
+                                    </td>
+                                } 
                             </tr>
                         }
                     </tbody>

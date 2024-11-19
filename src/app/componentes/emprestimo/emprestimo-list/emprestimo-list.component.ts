@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import * as html2pdf from 'html2pdf.js';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { DataService } from '../../../services/data-service';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
 	selector: 'app-emprestimo-list',
@@ -30,6 +31,7 @@ export class EmprestimoListComponent {
 
 	emprestimoService = inject(EmprestimoService);
 	dataService = inject(DataService);
+	loginService = inject(LoginService);
 
 	constructor() {
 		this.findAll();

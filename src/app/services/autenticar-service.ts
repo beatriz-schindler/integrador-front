@@ -13,7 +13,7 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 })
 export class AutenticarService {
 	http = inject(HttpClient);
-	API = 'http://localhost:8080/api/usuarios';
+	API = 'http://26.188.107.159:8080/api/usuarios';
 
 	usuario: Usuarios = new Usuarios();
 	usuarioService = inject(UsuarioService);

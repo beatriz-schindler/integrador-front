@@ -8,7 +8,7 @@ import { Equipamentos } from "../models/equipamentos";
 })
 export class EquipamentoService {
     http = inject(HttpClient);
-    API = "http://localhost:8080/api/equipamentos";
+    API = "http://26.188.107.159:8080/api/equipamentos";
 
     findAll(): Observable<Equipamentos[]>{
         return this.http.get<Equipamentos[]>(this.API+"/findAll");

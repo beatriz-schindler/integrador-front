@@ -9,7 +9,7 @@ import { DataService } from "./data-service";
 })
 export class EmprestimoService {
     http = inject(HttpClient);
-    API = "http://localhost:8080/api/emprestimos";
+    API = "http://26.188.107.159:8080/api/emprestimos";
 
     dataService = inject(DataService);
 

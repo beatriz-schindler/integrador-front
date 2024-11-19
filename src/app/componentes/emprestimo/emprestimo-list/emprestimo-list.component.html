@@ -15,12 +15,14 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="imprimirRelatorio" class="botaoImprimirRelatorio">
-                        <a id="imprimirRelatorio" class="btn btn-primary" (click)="imprimirRelatorio()"> 
-                            <i class="bi bi-plus-circle-fill"></i>
-                            Imprimir
-                        </a>
-                    </div>    
+                    @if(loginService.hasPermission("Admin")){
+                        <div id="imprimirRelatorio" class="botaoImprimirRelatorio">
+                            <a id="imprimirRelatorio" class="btn btn-primary" (click)="imprimirRelatorio()"> 
+                                <i class="bi bi-plus-circle-fill"></i>
+                                Imprimir
+                            </a>
+                        </div> 
+                    }  
                 </div>
                 <hr>
                 <div class="filtrosEquipamentos">

@@ -9,7 +9,7 @@ import { Alunos } from "../models/alunos";
 export class AlunoService {
 
     http = inject(HttpClient);
-    API = "http://localhost:8080/api/alunos";
+    API = "http://26.188.107.159:8080/api/alunos";
 
     findAll(): Observable<Alunos[]>{
         return this.http.get<Alunos[]>(this.API+"/findAll");
