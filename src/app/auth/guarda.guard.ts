@@ -8,7 +8,7 @@ export const guardaGuard: CanActivateFn = (route, state) => {
   let router = inject(Router);
 
   // Quem não é admin nao acessa a rota
-  if(!loginService.hasPermission('ADMIN') && state.url == '/admin/usuario'){
+  if(!loginService.hasPermission('Admin') && state.url == '/admin/usuario'){
     router.navigate(['/admin/dashboard']);
     return false
   }

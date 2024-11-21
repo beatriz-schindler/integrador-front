@@ -78,7 +78,7 @@
                                         <a href="admin/usuario/edit/{{usuario.id}}" class="btn btn-warning">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a class="btn btn-danger"><i class="bi bi-x-octagon"></i></a>
+                                        <a class="btn btn-danger" (click)="desativar(usuario.id)"><i class="bi bi-x-octagon"></i></a>
                                     </td>   
                                 </tr>
                             }  

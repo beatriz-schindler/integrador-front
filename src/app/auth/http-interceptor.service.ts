@@ -22,17 +22,17 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
 	  
         if (err.status === 401) {
           Swal.fire("Erro 401", "Você não está autorizado a acessar este conteúdo!", 'error');
-          console.log(err.message);
+          console.log(err);
           router.navigate(['admin/dashboard']);
         } else if (err.status === 403) {
           Swal.fire("Erro 403", err.message, 'error');
-          console.log(err.message);
+          console.log(err);
 		  router.navigate(['/login']);
         } else {
-          console.log(err.message);
+          console.log(err);
         }
       } else {
-        console.log(err.message);
+        console.log(err);
       }
       return throwError(() => err);
     })
