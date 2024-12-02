@@ -36,10 +36,17 @@
                                 </mdb-form-control>
                             </div>
                             <div class="campo2">
-                                <mdb-form-control>
-                                    <input mdbInput type="password" id="senha" name="senha" class="form-control" required [(ngModel)]="usuario.senha"/>
-                                    <label mdbLabel class="form-label" for="senha">Senha</label>
-                                </mdb-form-control>
+                                @if(usuario.id == 0){
+                                    <mdb-form-control>
+                                        <input mdbInput type="password" id="senha" name="senha" class="form-control" required [(ngModel)]="usuario.senha"/>
+                                        <label mdbLabel class="form-label" for="senha">Senha</label>
+                                    </mdb-form-control>
+                                }@else {
+                                    <mdb-form-control>
+                                        <input mdbInput type="password" id="senha" name="senha" class="form-control" [(ngModel)]="usuario.senha"/>
+                                        <label mdbLabel class="form-label" for="senha">Senha</label>
+                                    </mdb-form-control>
+                                } 
                             </div>
                             </div>
                         <br>

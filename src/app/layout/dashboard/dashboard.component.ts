@@ -65,7 +65,6 @@ export class DashboardComponent {
 				this.lista = list;
 				this.processarEmprestimosPorPatrimonio();
 				this.processarEmprestimosPorCurso();
-				this.processarEmprestimosPorAluno();
 				this.processarEmprestimosPorDia();
 			},
 			error: (erro) => {
@@ -104,20 +103,20 @@ export class DashboardComponent {
 			.slice(0, 5); // Limita aos 10 cursos mais utilizados
 	}
 
-	processarEmprestimosPorAluno() {
-		// Contagem de empréstimos por curso
-		const alunoCountMap = new Map<string, number>();
+	// processarEmprestimosPorAluno() {
+	// 	// Contagem de empréstimos por curso
+	// 	const alunoCountMap = new Map<string, number>();
 
-		this.lista.forEach((emprestimo) => {
-			const aluno = emprestimo.aluno.nome;
-			alunoCountMap.set(aluno, (alunoCountMap.get(aluno) || 0) + 1);
-		});
+	// 	this.lista.forEach((emprestimo) => {
+	// 		const aluno = emprestimo.aluno.nome;
+	// 		alunoCountMap.set(aluno, (alunoCountMap.get(aluno) || 0) + 1);
+	// 	});
 
-		// Convertendo o Map para o formato necessário pelo ngx-charts e ordenando
-		this.emprestimosPorAluno = Array.from(alunoCountMap, ([name, value]) => ({ name, value }))
-			.sort((a, b) => b.value - a.value) // Ordena em ordem decrescente pelo valor
-			.slice(0, 5); // Limita aos 10 cursos mais utilizados
-	}
+	// 	// Convertendo o Map para o formato necessário pelo ngx-charts e ordenando
+	// 	this.emprestimosPorAluno = Array.from(alunoCountMap, ([name, value]) => ({ name, value }))
+	// 		.sort((a, b) => b.value - a.value) // Ordena em ordem decrescente pelo valor
+	// 		.slice(0, 5); // Limita aos 10 cursos mais utilizados
+	// }
 
 	// Atualize o método processarEmprestimosPorDia
 	processarEmprestimosPorDia() {

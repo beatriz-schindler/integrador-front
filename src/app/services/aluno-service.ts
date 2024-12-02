@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Alunos } from "../models/alunos";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: "root"
@@ -9,7 +10,7 @@ import { Alunos } from "../models/alunos";
 export class AlunoService {
 
     http = inject(HttpClient);
-    API = "http://26.188.107.159:8080/api/alunos";
+    API = environment.API+"/api/alunos";
 
     findAll(): Observable<Alunos[]>{
         return this.http.get<Alunos[]>(this.API+"/findAll");

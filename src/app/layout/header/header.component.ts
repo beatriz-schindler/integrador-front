@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { AutenticarService } from '../../services/autenticar-service';
+import { LoginService } from '../../auth/login.service';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ import { AutenticarService } from '../../services/autenticar-service';
 export class HeaderComponent {
 
   autenticarService = inject(AutenticarService);
+  loginService = inject(LoginService);
 
 
 }

@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Login } from '../models/login';
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import { environment } from '../../environments/environment';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AutenticarService {
 	http = inject(HttpClient);
-	API = 'http://26.188.107.159:8080/api/usuarios';
+	API = environment.API+'/api/usuarios';
 
 	usuario: Usuarios = new Usuarios();
 	usuarioService = inject(UsuarioService);
