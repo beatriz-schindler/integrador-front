@@ -15,48 +15,71 @@ import { LoginService } from '../../../auth/login.service';
   styleUrl: './equipamento-list.component.scss'
 })
 export class EquipamentoListComponent {
-
   lista: Equipamentos[] = [];
   situacao: string = '';
   marca: string = '';
   modelo: string = '';
   patrimonio: string = '';
-  p: number = 1;
+
+  // Variáveis de paginação
+  currentPage: number = 1; // Página atual (começa em 1 para o usuário)
+  pageSize: number = 10; // Itens por página
+  totalItems: number = 0; // Total de itens
+  totalPages: number = 0; // Total de páginas
+  pageSizeOptions: number[] = [5, 10, 25, 50, 100, 250, 500];
 
   equipamentoService = inject(EquipamentoService);
-
   loginService = inject(LoginService);
 
-  constructor(){
-    this.findAll();
+  constructor() {
+    this.loadPage();
   }
 
-  findAll(){
+  loadPage() {
+    // Ajuste apenas para a chamada da API
+    const pageToSend = this.currentPage - 1;
+    
+    this.equipamentoService.findAllPage(pageToSend, this.pageSize).subscribe((data: any) => {
+        this.lista = data.content;
+        this.totalItems = data.totalElements;
+        this.totalPages = data.totalPages || Math.ceil(this.totalItems / this.pageSize);
+    });
+}
 
-    this.equipamentoService.findAll().subscribe({
-        next: list => { //Equivalente ao TRy
-            this.lista = list;
-        },
-        error: erro => { // Equivalente ao CATCH ou EXCEPTIONS
-          Swal.fire("Erro", erro.error, 'error');
-        }
-    })
+  // Nos métodos de navegação, mantenha currentPage começando em 1
+  previousPage(): void {
+      if (this.currentPage > 1) { // Mude para 1 em vez de 0
+          this.currentPage--;
+          this.loadPage();
+      }
   }
 
-  filtrar(){
-    if(this.situacao){
-      this.findBySituacao();
-    }else{
-      this.findAll();
-    }
+  nextPage(): void {
+      if (this.currentPage < this.totalPages) { // Remova o -1
+          this.currentPage++;
+          this.loadPage();
+      }
   }
 
-  filtrarCampos(){
+  onPageSizeChange() {
+    this.currentPage = 1; // Reset para a primeira página quando mudar o tamanho
+    this.loadPage();
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.loadPage();
+  }
+
+
+  filtrarCampos() {
+    this.currentPage = 1; // Sempre voltar para a primeira página ao filtrar
     this.equipamentoService.findByFilter(this.situacao, this.patrimonio, this.modelo, this.marca).subscribe({
-      next: list => { //Equivalente ao TRy
-          this.lista = list;
+      next: (response: any) => {
+        this.lista = response.content || response;
+        this.totalItems = response.totalElements || response.length;
       },
-      error: erro => { // Equivalente ao CATCH ou EXCEPTIONS
+      error: erro => {
         Swal.fire("Erro", erro.error, 'error');
       }
     });
@@ -67,8 +90,9 @@ export class EquipamentoListComponent {
     this.marca = '';
     this.patrimonio = '';
     this.situacao = '';
-    this.findAll();
-}
+    this.currentPage = 1;
+    this.loadPage();
+  }
 
   findBySituacao(){
     this.equipamentoService.findBySituacao(this.situacao).subscribe({
@@ -165,7 +189,7 @@ export class EquipamentoListComponent {
               text: typeof mensagem === 'string' ? mensagem : JSON.stringify(mensagem), // Verifica se é string
               icon: "success"
             });
-            this.findAll(); // Atualiza a lista de equipamentos após a exclusão
+            this.loadPage(); // Atualiza a lista de equipamentos após a exclusão
           },
           error: erro => {
             Swal.fire("Erro", erro.error, 'error'); // Trata erros ao tentar excluir

@@ -11,9 +11,18 @@ export class EquipamentoService {
     http = inject(HttpClient);
     API = environment.API+"/api/equipamentos";
 
+    
     findAll(): Observable<Equipamentos[]>{
         return this.http.get<Equipamentos[]>(this.API+"/findAll");
 
+    }
+    
+    // Busca equipamentos paginados
+    findAllPage(page: number, size: number): Observable<any> {
+        const params = new HttpParams()
+        .set('page', page.toString())
+        .set('size', size.toString());
+        return this.http.get<any>(`${this.API}/findAllPage`, { params });
     }
 
     save(equipamento: Equipamentos): Observable<string>{

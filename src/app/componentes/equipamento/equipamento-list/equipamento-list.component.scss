@@ -1,9 +1,10 @@
 :host {
     background-color: #f0f0f0;
     display: block;
-    height: 180vh;
+    min-height: 100vh; /* Mudei height para min-height */
+    padding-bottom: 2rem; /* Espaço extra no rodapé */
+    box-sizing: border-box; /* Garante que o padding não some com o height */
   }
-
 
 .botaoNovoEquipamento {
     // width: 10%;
@@ -107,3 +108,87 @@ ul {
     margin-left: 20px; /* Espaço à esquerda */
     color: #555; /* Cor do texto */
 }
+
+
+.pagination {
+  margin: 0;
+}
+
+.page-link {
+  cursor: pointer;
+}
+
+.disabled .page-link {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Estilo para a célula do filtro */
+.filter-cell {
+  width: 120px; /* Largura fixa para a célula */
+  padding: 8px !important;
+}
+
+/* Container do filtro */
+.page-size-filter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Estilo do select */
+.page-size-filter .form-select {
+  width: 80px; /* Largura reduzida */
+  padding: 0.25rem 0.5rem; /* Padding menor */
+  font-size: 0.875rem; /* Fonte menor */
+  height: 30px; /* Altura reduzida */
+  line-height: 1.5; /* Ajuste de alinhamento vertical */
+  border-radius: 4px; /* Bordas mais suaves */
+  border: 1px solid #ced4da; /* Borda mais discreta */
+}
+
+/* Ajuste para alinhar com cabeçalho */
+th {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Estilos para os botões de paginação */
+.pagination .page-link {
+    background-color: #00E88F;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    margin: 0 3px;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Efeito hover para os botões ativos */
+  .pagination .page-link:not(.disabled):hover {
+    background: #00E88F;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px 0px #191A23;
+    transform: translateY(-2px);
+  }
+  
+  /* Estilo para o item desabilitado */
+  .pagination .page-item.disabled .page-link {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  /* Estilo para o span da página atual */
+  .pagination .page-item span.page-link {
+    background-color: transparent;
+    color: #000000;
+    cursor: default;
+    box-shadow: none;
+  }
+  
+  .pagination .page-item span.page-link:hover {
+    background-color: transparent;
+    color: #000000;
+    transform: none;
+  }

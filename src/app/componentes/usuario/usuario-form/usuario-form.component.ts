@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario-service';
-import { Usuario } from '../../../auth/usuario';
 import { Usuarios } from '../../../models/usuarios';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @Component({
   selector: 'app-usuario-form',
   standalone: true,
-  imports: [FormsModule, MdbFormsModule, NgxMaskPipe, NgxMaskDirective],
+  imports: [FormsModule, MdbFormsModule, NgxMaskDirective],
   templateUrl: './usuario-form.component.html',
   styleUrl: './usuario-form.component.scss',
   providers: [provideNgxMask()]
