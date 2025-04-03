@@ -18,6 +18,15 @@ export class EmprestimoService {
         return this.http.get<Emprestimos[]>(this.API+"/findAll");
     }
 
+    // Busca equipamentos paginados
+    findAllPage(page: number, size: number): Observable<any> {
+        const params = new HttpParams()
+        .set('page', page.toString())
+        .set('size', size.toString());
+        return this.http.get<any>(`${this.API}/findAllPage`, { params });
+    }
+
+
     save(emprestimo: Emprestimos): Observable<string>{
         return this.http.post<string>(this.API+"/save", emprestimo, {responseType: 'text' as 'json'});
     }
@@ -34,20 +43,27 @@ export class EmprestimoService {
         return this.http.put<string>(this.API+"/encerrar/"+id, emprestimo, {responseType: 'text' as 'json'});
     }
 
-    findByFilter(dataRetirada: Date | undefined, dataDevolucao: Date | undefined, situacao: string, ra: string, usuario: string, patrimonio: string): Observable<Emprestimos[]>{
-  
-        const dataRetiradaFormatada = this.dataService.formatarDataParaSalvar(dataRetirada);
-        const dataDevolucaoFormatada = this.dataService.formatarDataParaSalvar(dataDevolucao);
-
-
+    findByFilter(
+        dataRetirada: Date | undefined,
+        dataDevolucao: Date | undefined,
+        situacao: string,
+        ra: string,
+        usuario: string,
+        patrimonio: string,
+      ): Observable<any> { // Retorna um objeto paginado
+      
+        const dataRetiradaFormatada = dataRetirada ? this.dataService.formatarDataParaSalvar(dataRetirada) : '';
+        const dataDevolucaoFormatada = dataDevolucao ? this.dataService.formatarDataParaSalvar(dataDevolucao) : '';
+      
         let httpParams = new HttpParams()
-        .set('dataRetirada', dataRetiradaFormatada)
-        .set('dataDevolucao', dataDevolucaoFormatada)
-        .set('situacao', situacao)
-        .set('ra', ra)
-        .set('usuario', usuario)
-        .set('patrimonio', patrimonio);
-        
-        return this.http.get<Emprestimos[]>(`${this.API}/findByFilter`, { params: httpParams });
-    }
+          .set('dataRetirada', dataRetiradaFormatada)
+          .set('dataDevolucao', dataDevolucaoFormatada)
+          .set('situacao', situacao || '')
+          .set('ra', ra || '')
+          .set('usuario', usuario || '')
+          .set('patrimonio', patrimonio || '')
+      
+        return this.http.get<any>(`${this.API}/findByFilter`, { params: httpParams });
+      }
+      
 }

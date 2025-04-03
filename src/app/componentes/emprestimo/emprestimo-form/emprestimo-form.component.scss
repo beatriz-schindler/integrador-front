@@ -56,13 +56,27 @@
     transform: scale(1.05); /* Aumenta levemente o tamanho */
 }
 
+.btn.btn-success:focus {
+    background-color: #4CAF50;
+    box-shadow: 0px 5px 0px 0px #2f6e31; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
+}
+
 .btn-primary {
+    margin-left: 2vh;
+    margin-right: 2vh;
     background-color: #0058e6;
     transition: background-color 0.3s, transform 0.3s; /* Adiciona transição suave */
 }
 
 /* Efeito hover para btn-primary */
 .btn-primary:hover {
+    background-color: #0046b0;
+    box-shadow: 0px 5px 0px 0px #1e2563; /* Adiciona uma sombra sutil para profundidade */ /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
+}
+
+.btn-primary:focus {
     background-color: #0046b0;
     box-shadow: 0px 5px 0px 0px #1e2563; /* Adiciona uma sombra sutil para profundidade */ /* Cor de fundo ao passar o mouse */
     transform: scale(1.05); /* Aumenta levemente o tamanho */
@@ -80,9 +94,12 @@
     transform: scale(1.05); /* Aumenta levemente o tamanho */
 }
 
+.btn-danger:focus {
+    background-color: #c6004d; 
+    box-shadow: 0px 5px 0px 0px #610126;/* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
+}
  
- 
-
 .header {
     display: flex; /* Faz o título e o parágrafo ficarem lado a lado */
     align-items: center; /* Centraliza verticalmente os itens */

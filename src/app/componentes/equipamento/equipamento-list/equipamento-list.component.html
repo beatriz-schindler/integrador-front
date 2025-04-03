@@ -10,7 +10,9 @@
                         <div class="header">
                             <div class="title">Equipamentos</div>
                             <ul>
+                                @if(loginService.hasPermission("Admin")){
                                 <li>Clique para adicionar, editar ou excluir</li>
+                                }
                                 <li>Clique no ícone da lupa para buscar o que deseja </li> 
                                 <li>Selecione quantos itens deseja visualizar por página</li>
                             </ul>
@@ -66,6 +68,7 @@
                             <th>Marca</th>
                             <th>Modelo</th>
                             <th>Situação</th>
+                            <th>Observação</th>
                             <th class="filter-cell">
                                 <div class="page-size-filter">
                                   <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()" class="form-select">
@@ -85,6 +88,7 @@
                                 <td>{{equipamento.marca}}</td>
                                 <td>{{equipamento.modelo}}</td>
                                 <td>{{equipamento.situacao}}</td>
+                                <td>{{equipamento.observacao}}</td>
                                 @if(loginService.hasPermission("Admin")){
                                     <td class="alinharBotoes">
                                         <a href="admin/equipamento/edit/{{equipamento.id}}" class="btn btn-warning">

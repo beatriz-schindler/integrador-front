@@ -10,8 +10,8 @@
                         <div class="header">
                             <div class="title">Empréstimo <br>Notebook</div>
                             <ul>
-                                <li>Digite o RA do aluno e o Patrimônio do Equipamento</li>
-                                <li>Inicie ou encerre o Empréstimo</li>
+                                <li>Digite o RA do aluno e o Patrimônio do equipamento para iniciar empréstimo</li>
+                                <li>Informe apenas o patrimônio para encerrar o empréstimo</li>
                             </ul>
                         </div>
                         <hr>
@@ -24,18 +24,18 @@
                         
                             <div class="inputs">
                                 <mdb-form-control>
-                                    <input mdbInput type="text" [(ngModel)]="aluno.ra" id="form1" (blur)="findAlunoByRa()" name="ra" class="form-control" required/>
-                                    <label mdbLabel class="form-label" for="form1">RA do Aluno</label>
+                                    <input mdbInput type="text" [(ngModel)]="aluno.ra" id="raAluno" (blur)="findAlunoByRa()" name="ra" class="form-control" required tabindex="1"/>
+                                    <label mdbLabel class="form-label" for="raAluno">RA do Aluno</label>
                                 </mdb-form-control>
                                 <br>
                                 <mdb-form-control>
-                                    <input mdbInput type="text" id="form1" [(ngModel)]="equipamento.patrimonio" (blur)="findEquipamentoByPatrimonio()" name="patrimonio" class="form-control" required/>
-                                    <label mdbLabel class="form-label" for="form1">Patrimônio do Equipamento</label>
+                                    <input mdbInput type="text" id="patEquip" [(ngModel)]="equipamento.patrimonio" (blur)="findEquipamentoByPatrimonio()" name="patrimonio" class="form-control" required tabindex="2"/>
+                                    <label mdbLabel class="form-label" for="patEquip">Patrimônio do Equipamento</label>
                                 </mdb-form-control>
                                 <br>
                                 <mdb-form-control>
-                                    <input mdbInput type="text" id="form1" [(ngModel)]="emprestimo.observacao" name="observacao" class="form-control" style="height: 98px;" />
-                                    <label mdbLabel class="form-label" for="form1">Observação</label>
+                                    <input mdbInput type="text" id="obs" [(ngModel)]="emprestimo.observacao" name="observacao" class="form-control" style="height: 98px;" tabindex="3"/>
+                                    <label mdbLabel class="form-label" for="obs">Observação</label>
                                 </mdb-form-control>
                             </div>
                             <div class="inputs">
@@ -61,10 +61,10 @@
                             </div>
                         </div>
                         <div class="alinharBotoes">
-                            <div class="buttons">
-                                <button class="btn btn-primary" (click)="limparCampo()">Limpar Campos</button>
-                                <button class="btn btn-success" [disabled]="!newEmprestimo.valid || emprestimoEncontrado" (click)="iniciarEmprestimo()">Iniciar Empréstimo</button>
-                                <button class="btn btn-danger" (click)="encerrarEmprestimo()">Encerrar Empréstimo</button>
+                            <div class="buttons"> 
+                                <button class="btn btn-success" [disabled]="!newEmprestimo.valid || emprestimoEncontrado" (click)="iniciarEmprestimo()" tabindex="4">Iniciar Empréstimo</button>
+                                <button class="btn btn-danger" (click)="encerrarEmprestimo()" tabindex="5">Encerrar Empréstimo</button>
+                                <button class="btn btn-primary" (click)="limparCampo()" tabindex="6">Limpar Campos</button>
                             </div>
                         </div>
                     </form>

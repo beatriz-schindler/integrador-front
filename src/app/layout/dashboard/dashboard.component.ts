@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { EmprestimoService } from '../../services/emprestimo-service';
 import { Emprestimos } from '../../models/emprestimos';
 import Swal from 'sweetalert2';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Color, ScaleType } from '@swimlane/ngx-charts'; // Importar Color e ScaleType
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { DatePipe } from '@angular/common';
+import { EmprestimoService } from '../../services/emprestimo-service';
 
 @Component({
 	selector: 'app-dashboard',
@@ -59,9 +59,10 @@ export class DashboardComponent {
 	}
 
 	findAll() {
-		.0
+		console.log("Chamando API de empréstimos...");
 		this.emprestimoService.findAll().subscribe({
 			next: (list) => {
+			 
 				this.lista = list;
 				this.processarEmprestimosPorPatrimonio();
 				this.processarEmprestimosPorCurso();

@@ -47,21 +47,7 @@ export class DataService {
     
         return dataFormatada.toISOString().slice(0, 19); // Formato ISO sem milissegundos
     }
-    
-    
-    //   // Função para formatar a data para salvar no formato ISO
-    // formatarDataParaSalvar(data: string): string {
-    //     const partes = data.split('-'); // 'dd-MM-yyyy'
-    //     const dia = Number(partes[0]);
-    //     const mes = Number(partes[1]) - 1; // Meses em JavaScript começam do zero
-    //     const ano = Number(partes[2]);
-    
-    //     // Cria um objeto Date no horário local
-    //     const dataLocal = new Date(ano, mes, dia);
-    
-    //     // Converte a data para ISO, ajustando para UTC
-    //     return dataLocal.toISOString(); // Salva em formato ISO
-    // }
+
       
       // Função para formatar a data recebida do backend para o input no formato 'yyyy-MM-dd'
     formatarDataParaInput(data: string): string {

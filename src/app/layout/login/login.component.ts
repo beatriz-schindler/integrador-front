@@ -49,50 +49,50 @@ export class LoginComponent implements OnInit {
   autenticar() {
     this.autenticarService.login(this.login).subscribe({
       next: token => {
+        console.log(token);
         this.autenticarService.addToken(token);
+        
+        // Exibir Toast de sucesso
+        Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          icon: "success",
+          title: "Autenticado com sucesso!",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+  
+        // Simulando um usuário (caso o serviço de autenticação retorne um)
+        const user = { login: this.login.usuario }; // Ajuste conforme necessário
+        localStorage.setItem('usuario', JSON.stringify(user));
+  
+        // Redirecionar para o painel administrativo
         this.router.navigate(['admin/dashboard']);
-        // this.usuario = user;
-        // if (this.usuario && this.usuario.senha === senha) {
-        //   const Toast = Swal.mixin({
-        //     toast: true,
-        //     position: "bottom-end",
-        //     showConfirmButton: false,
-        //     timer: 3000,
-        //     timerProgressBar: true,
-        //     didOpen: (toast) => {
-        //       toast.onmouseenter = Swal.stopTimer;
-        //       toast.onmouseleave = Swal.resumeTimer;
-        //     }
-        //   });
-        //   Toast.fire({
-        //     icon: "success",
-        //     title: "Autenticado com sucesso!"
-        //   });
-        //   localStorage.setItem('this.usuario', JSON.stringify(user)); // Salva o usuário no localStorage
-        //   this.router.navigate(['admin/dashboard']);
-        // } else {
-        //   const Toast = Swal.mixin({
-        //     toast: true,
-        //     position: "top-end",
-        //     showConfirmButton: false,
-        //     timer: 3000,
-        //     timerProgressBar: true,
-        //     didOpen: (toast) => {
-        //       toast.onmouseenter = Swal.stopTimer;
-        //       toast.onmouseleave = Swal.resumeTimer;
-        //     }
-        //   });
-        //   Toast.fire({
-        //     icon: "error",
-        //     title: "Usuário ou senha incorretos!"
-        //   });
-       // }
       },
       error: erro => {
-        Swal.fire('Erro', erro.error, 'error');
+        // Exibir Toast de erro
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "error",
+          title: "Usuário ou senha incorretos!",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+  
+        console.error("Erro de login:", erro);
       }
     });
   }
-
   
 }

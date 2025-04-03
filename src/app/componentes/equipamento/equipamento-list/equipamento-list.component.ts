@@ -105,28 +105,6 @@ export class EquipamentoListComponent {
     });
   }
 
-  // findByEquipAtivo(){
-  //   this.equipamentoService.findByEquipamentoAtivo().subscribe({
-  //     next: list => { //Equivalente ao TRy
-  //       this.lista = list;
-  //   },
-  //   error: erro => { // Equivalente ao CATCH ou EXCEPTIONS
-  //     Swal.fire("Erro", erro.error, 'error');
-  //   }
-  //   });
-  // }
-
-  // findByEquipInativo(){
-  //   this.equipamentoService.findByEquipamentoInativo().subscribe({
-  //     next: list => { //Equivalente ao TRy
-  //       this.lista = list;
-  //   },
-  //   error: erro => { // Equivalente ao CATCH ou EXCEPTIONS
-  //     Swal.fire("Erro", erro.error, 'error');
-  //   }
-  //   });
-  // }
-
   findByModelo(){
     this.equipamentoService.findByModelo(this.modelo).subscribe({
       next: list => { //Equivalente ao TRy

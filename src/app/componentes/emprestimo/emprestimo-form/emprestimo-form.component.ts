@@ -48,70 +48,137 @@ export class EmprestimoFormComponent {
     }
   }
 
-  findAlunoByRa(){
+  findAlunoByRa() {
     this.alunoService.findByRa(this.aluno.ra).subscribe({
       next: aluno => {
         if (aluno) {
           this.aluno = aluno;
         } else {
           this.resetAlunoFields(); // Limpa os campos caso o aluno não seja encontrado
-          Swal.fire("Erro", "Aluno não encontrado!", 'error');
+          Swal.fire({
+            toast: true,
+            position: "bottom-end", // Exibe no canto inferior direito
+            icon: "error",
+            title: "Aluno não encontrado!",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: toast => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
         }
       },
       error: erro => {
         this.resetAlunoFields();
-        Swal.fire("Erro", erro.error, 'error');
+        Swal.fire({
+          toast: true,
+          position: "bottom-end", // Exibe no canto inferior direito
+          icon: "error",
+          title: "Aluno não encontrado!",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
       }
     });
   }
+  
 
   resetAlunoFields() {
     this.aluno = { ra: '', nome: '', curso: '', ativo: 0};
   }
 
-  findEquipamentoByPatrimonio(){
-
+  findEquipamentoByPatrimonio() {
     const patrimonio = this.equipamento.patrimonio;
-
-    // Primeiro, verifica se o equipamento possui empréstimo em andamento
+  
+    // Se o campo de patrimônio estiver vazio, não faz nada
+    if (!patrimonio) {
+      return;
+    }
+  
+    // Verifica se o equipamento possui empréstimo em andamento
     this.emprestimoService.findByEquipamentoPorEmprestimoAtivo(patrimonio).subscribe(
-        (emprestimo) => {
-            if (emprestimo) {
-              if (this.aluno.ra) { // Verifica se 'ra' já tem um valor válido
-                Swal.fire("Erro", "O equipamento informado já está emprestado!", 'error');
-                this.equipamento.patrimonio = ''; // Limpa o patrimônio se o equipamento já está emprestado
-              } else {
-                // Caso não haja erro, preenche os dados do empréstimo, aluno e equipamento
-                this.emprestimo = emprestimo;
-                this.aluno = emprestimo.aluno;
-                this.equipamento = emprestimo.equipamento;
-                this.emprestimoEncontrado = true;
+      (emprestimo) => {
+        if (emprestimo) {
+          if (this.aluno.ra) { // Verifica se 'ra' já tem um valor válido
+            Swal.fire({
+              toast: true,
+              position: "bottom-end", // Exibe no canto inferior direito
+              icon: "error",
+              title: "O equipamento informado já está emprestado!",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: toast => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
               }
-                 
-            } else {
-                // Se não houver empréstimo ativo, busque os dados do equipamento
-                this.equipamentoService.findByPatrimonio(patrimonio).subscribe(
-                    (equipamento) => {
-                      if (equipamento) {
-                        this.equipamento = equipamento;
-                      } else {
-                        this.resetEquipamentoFields(); // Limpa os campos caso o equipamento não seja encontrado
-                        Swal.fire("Erro", "Equipamento não encontrado!", 'error');
-                      }
-                    },
-                    (error) => {
-                        Swal.fire("Erro", error.error, 'error');
-                        this.resetEquipamentoFields();
-                    }
-                );
+            });
+  
+            this.equipamento.patrimonio = ''; // Limpa o patrimônio se o equipamento já está emprestado
+          } else {
+            // Caso não haja erro, preenche os dados do empréstimo, aluno e equipamento
+            this.emprestimo = emprestimo;
+            this.aluno = emprestimo.aluno;
+            this.equipamento = emprestimo.equipamento;
+            this.emprestimoEncontrado = true;
+          }
+        } else {
+          // Se não houver empréstimo ativo, busca os dados do equipamento
+          this.equipamentoService.findByPatrimonio(patrimonio).subscribe(
+            (equipamento) => {
+              if (equipamento) {
+                this.equipamento = equipamento;
+              } else {
+                this.resetEquipamentoFields(); // Limpa os campos caso o equipamento não seja encontrado
+                Swal.fire({
+                  toast: true,
+                  position: "bottom-end", // Exibe no canto inferior direito
+                  icon: "error",
+                  title: "Equipamento não encontrado!",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: toast => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+              }
+            },
+            (error) => {
+              Swal.fire({
+                toast: true,
+                position: "bottom-end", // Exibe no canto inferior direito
+                icon: "error",
+                title: error.error,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: toast => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+  
+              this.resetEquipamentoFields();
             }
-        },
-        (error) => {
-            console.error("Erro ao verificar empréstimo", error);
-            // Lidar com erro ao verificar empréstimo
+          );
         }
+      },
+      (error) => {
+        console.error("Erro ao verificar empréstimo", error);
+      }
     );
   }
+  
+  
 
   resetEquipamentoFields() {
     this.equipamento = {
@@ -126,45 +193,105 @@ export class EmprestimoFormComponent {
     };
   }
 
-  iniciarEmprestimo(){
+  iniciarEmprestimo() {
     this.emprestimo.aluno = this.aluno;
     this.emprestimo.equipamento = this.equipamento;
+  
     this.emprestimoService.save(this.emprestimo).subscribe({
       next: mensagem => {
+        // Exibir Toast de sucesso
         Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          icon: "success",
           title: mensagem,
-          icon: "success"
-        }).then(() => {
-          this.limparCampo();
-          //this.router.navigate(['admin/emprestimo/new']);
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
         });
+  
+        this.limparCampo();
+  
+        // Retorna o foco para o campo RA do Aluno após limpar os campos
+        setTimeout(() => {
+          document.getElementById("raAluno")?.focus();
+        }, 100);
       },
       error: erro => {
-        Swal.fire('Erro', erro.error, 'error');
+        // Exibir Toast de erro
+        Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          icon: "error",
+          title: erro.error,
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+  
         this.limparCampo();
+  
+        // Retorna o foco para o campo RA do Aluno após limpar os campos
+        setTimeout(() => {
+          document.getElementById("raAluno")?.focus();
+        }, 100);
       }
     });
   }
+  
 
-  encerrarEmprestimo(){
+  encerrarEmprestimo() {
     this.emprestimo.aluno = this.aluno;
     this.emprestimo.equipamento = this.equipamento;
     console.log(this.emprestimo.id);
+  
     this.emprestimoService.encerrar(this.emprestimo.id, this.emprestimo).subscribe({
       next: mensagem => {
+        // Exibir Toast de sucesso
         Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          icon: "success",
           title: mensagem,
-          icon: "success"
-        }).then(() => {
-          this.limparCampo();
-          //this.router.navigate(['admin/emprestimo/new']);
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
         });
+  
+        this.limparCampo();
+        // this.router.navigate(['admin/emprestimo/new']);
       },
       error: erro => {
-        Swal.fire('Erro', erro.error, 'error');
+        // Exibir Toast de erro
+        Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          icon: "error",
+          title: erro.error,
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: toast => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
       }
     });
-  }
+  }  
+  
 
   limparCampo(){
     this.aluno.ra = '';

@@ -17,7 +17,7 @@
                     </div>
                     @if(loginService.hasPermission("Admin")){
                         <div id="imprimirRelatorio" class="botaoImprimirRelatorio">
-                            <a id="imprimirRelatorio" class="btn btn-primary" (click)="imprimirRelatorio()"> 
+                            <a id="imprimirRelatorio" class="btn btn-primary" (click)="exportarParaPDF()"> 
                                 <i class="bi bi-plus-circle-fill"></i>
                                 Imprimir
                             </a>
@@ -28,36 +28,36 @@
                 <div class="filtrosEquipamentos">
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput  type="text" id="patrimonio" [(ngModel)]="patrimonio"  name="patrimonio" class="form-control"/>
+                            <input mdbInput  type="text" id="patrimonio" [(ngModel)]="patrimonio"  name="patrimonio" (keydown.enter)="filtrarCampos()" class="form-control"/>
                             <label mdbLabel class="form-label" for="patrimonio">Patrimônio</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput  type="text" id="ra" [(ngModel)]="ra" name="ra" class="form-control"/>
+                            <input mdbInput  type="text" id="ra" [(ngModel)]="ra" name="ra" (keydown.enter)="filtrarCampos()" class="form-control"/>
                             <label mdbLabel class="form-label" for="ra">RA do Aluno</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput type="text" id="usuario" [(ngModel)]="usuario" name="usuario" class="form-control"/>
+                            <input mdbInput type="text" id="usuario" [(ngModel)]="usuario" name="usuario" (keydown.enter)="filtrarCampos()" class="form-control"/>
                             <label mdbLabel class="form-label" for="usuario">Operador</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput type="text" id="dataRetirada" [(ngModel)]="dataRetirada" mask="00-00-0000" [dropSpecialCharacters]="false" name="dataRetirada" class="form-control"/>
+                            <input mdbInput type="text" id="dataRetirada" [(ngModel)]="dataRetirada" (keydown.enter)="filtrarCampos()" mask="00-00-0000" [dropSpecialCharacters]="false" name="dataRetirada" class="form-control"/>
                             <label mdbLabel class="form-label" for="dataRetirada">Data de Retirada</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput type="text" id="dataDevolucao" [(ngModel)]="dataDevolucao"  mask="00-00-0000" [dropSpecialCharacters]="false" name="dataDevolucao" class="form-control"/>
+                            <input mdbInput type="text" id="dataDevolucao" [(ngModel)]="dataDevolucao" (keydown.enter)="filtrarCampos()" mask="00-00-0000" [dropSpecialCharacters]="false" name="dataDevolucao" class="form-control"/>
                             <label mdbLabel class="form-label" for="dataDevolucao">Data de Devolução</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
-                        <select class="form-select" [(ngModel)]="situacao"  name="situacao" aria-label="Default select example">
+                        <select class="form-select" [(ngModel)]="situacao"  name="situacao"  aria-label="Default select example">
                             <option value="" disabled selected hidden>Selecione a Situação</option>
                             <option value="Em Andamento">Em Andamento</option>
                             <option value="Encerrado">Encerrado</option>
@@ -82,6 +82,15 @@
                             <th>Data Retirada</th>
                             <th>Data Devolução</th>
                             <th>Situação</th>
+                            <th class="filter-cell">
+                                <div class="page-size-filter">
+                                  <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()" class="form-select">
+                                    @for (size of pageSizeOptions; track $index) {
+                                      <option [value]="size">{{ size }}</option>
+                                    }
+                                  </select>
+                                </div>
+                              </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,6 +109,19 @@
                                         {{emprestimo.situacao}}
                                     }
                                 </td>
+
+                                <td class="container-botoes">
+                                    @if(emprestimo.situacao === "Em Andamento") {
+                                        <button class="btn-andamento" (click)="confirmarEncerramento(emprestimo)">
+                                            <i class="bi bi-x-square-fill"></i>
+                                        </button>
+                                    } @else {
+                                        <button class="btn" disabled>
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        </button>
+                                    }
+                                </td>
+
                             </tr>
                         }
                     </tbody>
@@ -108,6 +130,30 @@
                   <div>
                     Página: {{ p }}
                   </div> -->
+
+                  <!-- Controles de paginação -->
+                  <div class="col-md-12 d-flex justify-content-center mt-3">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <!-- Botão "Página Anterior" -->
+                            <li class="page-item" [class.disabled]="currentPage === 1">
+                                <a class="page-link" (click)="previousPage()">Anterior</a>
+                            </li>
+                            
+                            <!-- Informação da página atual e total de páginas -->
+                            <li class="page-item">
+                                <span class="page-link">
+                                    Página {{ currentPage }} de {{ totalPages }}
+                                </span>
+                            </li> 
+                            
+                            <!-- Botão "Próxima Página" -->
+                            <li class="page-item" [class.disabled]="currentPage >= totalPages">
+                                <a class="page-link" (click)="nextPage()">Próximo</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                 </div>
             </div>
             </div>

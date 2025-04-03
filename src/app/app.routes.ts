@@ -20,6 +20,7 @@ export const routes: Routes = [
         {path: "equipamento/new", component: EquipamentoFormComponent},
         {path: "equipamento/edit/:id", component: EquipamentoFormComponent},
         {path: "relatorio", component: EmprestimoListComponent},
+        {path: "relatorio/:page", component: EmprestimoListComponent},
         {path: "emprestimo/new", component: EmprestimoFormComponent},
         {path: "aluno", component: AlunoListComponent},
         {path: "usuario", component: UsuarioListComponent},

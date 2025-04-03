@@ -31,6 +31,7 @@
 								required
 								class="form-control"
 								[(ngModel)]="login.senha"
+								(keydown.enter)="autenticar()"
 							/>
 							<label mdbLabel class="form-label" for="form1">Senha</label>
 						</mdb-form-control>
