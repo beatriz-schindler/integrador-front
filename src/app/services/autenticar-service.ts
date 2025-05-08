@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Usuarios } from '../models/usuarios';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { UsuarioService } from './usuario-service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ export class AutenticarService {
 	login(login: Login): Observable<string> {
 		return this.http.post<string>(this.API + '/login', login, { responseType: 'text' as 'json' });
 	}
+  
 
 	getUsuarioAutenticado(): Usuarios | null {
     let user = this.jwtDecode() as Usuarios;

@@ -78,6 +78,8 @@ export class EquipamentoListComponent {
       next: (response: any) => {
         this.lista = response.content || response;
         this.totalItems = response.totalElements || response.length;
+        this.currentPage = 1; // Reinicia a paginação
+				this.totalPages = 1; // Garante que tudo será exibido em uma única página
       },
       error: erro => {
         Swal.fire("Erro", erro.error, 'error');
