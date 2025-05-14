@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Emprestimos } from '../../../models/emprestimos';
@@ -9,13 +9,15 @@ import * as html2pdf from 'html2pdf.js';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { DataService } from '../../../services/data-service';
 import { LoginService } from '../../../auth/login.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
 	selector: 'app-emprestimo-list',
 	standalone: true,
-	imports: [FormsModule, MdbFormsModule, DatePipe, NgxMaskDirective, NgxMaskPipe],
+	imports: [FormsModule, MdbFormsModule, DatePipe, NgxMaskDirective, MdbModalModule],
 	templateUrl: './emprestimo-list.component.html',
 	styleUrl: './emprestimo-list.component.scss',
 	providers: [provideNgxMask()]
@@ -82,19 +84,6 @@ export class EmprestimoListComponent {
 		this.loadPage();
 	  }
 
-	// Método para filtrar campos
-	// filtrarCampos() {
-	
-	// 	this.emprestimoService.findByFilter(this.dataRetirada, this.dataDevolucao, this.situacao, this.ra, this.usuario, this.patrimonio).subscribe({
-	// 	  next: (list) => {
-	// 		this.lista = list.sort((a, b) => new Date(b.dataRetirada).getTime() - new Date(a.dataRetirada).getTime());
-	// 	  },
-	// 	  error: (erro) => {
-	// 		console.log(erro);
-	// 		Swal.fire("Erro", erro.error, 'error');
-	// 	  }
-	// 	});
-	//   }
 	  
 	filtrarCampos() {
 		this.emprestimoService.findByFilter(
@@ -153,67 +142,82 @@ export class EmprestimoListComponent {
 			}
 		});
 	}
-	
-	
-
-	// imprimirRelatorio() {
-	// 	const element = document.getElementById('pdfContent');
-	// 	const header = element?.querySelector('.header-container') as HTMLElement;
-	  
-	// 	const options = {
-	// 	  margin: 0.5,
-	// 	  filename: 'relatorioEasyNote.pdf',
-	// 	  image: { type: 'jpeg', quality: 0.98 },
-	// 	  html2canvas: { scale: 3, scrollY: 0, useCORS: true },
-	// 	  jsPDF: { unit: 'cm', format: 'A4', orientation: 'landscape' },
-	// 	};
-	  
-	// 	if (element && header) {
-	// 	  header.style.visibility = 'visible'; // Mantém o header visível, mas sem afetar o layout
-	  
-	// 	  setTimeout(() => {
-	// 		(window as any).html2pdf().set(options).from(element).save().then(() => {
-	// 		  header.style.visibility = 'hidden'; // Oculta o header de volta
-	// 		});
-	// 	  }, 500); // Pequeno delay para evitar problemas na renderização
-	// 	}
-	//   }
 	  
 
-	  exportarParaPDF() {
-		const tabela = document.getElementById('relatorioList');
-	
-		if (!tabela) {
-		  console.error("Tabela não encontrada!");
-		  return;
-		}
-	
-		// 1️⃣ Salvar configurações atuais
-		const paginaAtual = this.currentPage;
-		const tamanhoPaginaAnterior = this.pageSize;
-	
-		// 2️⃣ Ajustar a paginação para exibir todos os registros filtrados
-		this.pageSize = this.totalItems || 500; // Máximo de registros filtrados
-		this.currentPage = 1;
-	
-		// 3️⃣ Tempo para a tabela recarregar com os novos dados
-		setTimeout(() => {
-		  html2canvas(tabela, { scale: 2 }).then(canvas => {
-			const imgData = canvas.toDataURL('image/png');
-			const pdf = new jsPDF('p', 'mm', 'a4');
-	
-			const imgWidth = 190;
-			const imgHeight = (canvas.height * imgWidth) / canvas.width;
-	
-			pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-			pdf.save('relatorio_filtrado.pdf');
-	
-			// 4️⃣ Restaurar paginação original
-			this.pageSize = tamanhoPaginaAnterior;
-			this.currentPage = paginaAtual;
+	/*exportarParaXLSX() {
+		this.emprestimoService.findAll().subscribe(emprestimos => {
+		  const dadosFormatados = emprestimos.map((e: any) => {
+			return {
+			  'Patrimônio': e.equipamento?.patrimonio || '',
+			  'RA': e.aluno?.ra || '',
+			  'Nome': e.aluno?.nome || '',
+			  'Curso': e.aluno?.curso || '',
+			  'Data de Retirada': this.dataService.formatarDataHora(e.dataRetirada),
+			  'Data de Devolução': this.dataService.formatarDataHora(e.dataDevolucao)
+			};
 		  });
-		}, 500); // Tempo para atualização da tabela antes da exportação
-	  }
+	  
+		  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dadosFormatados);
+		  const workbook: XLSX.WorkBook = { Sheets: { 'Empréstimos': worksheet }, SheetNames: ['Empréstimos'] };
+		  const excelBuffer: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+	  
+		  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+		  saveAs(blob, 'relatorio_emprestimos.xlsx');
+		});
+	  }*/
+
+		exportarParaXLSX() {
+			// Verifica se algum campo de filtro está preenchido
+			const filtrosPreenchidos = this.dataRetirada || this.dataDevolucao || this.situacao || this.ra || this.usuario || this.patrimonio;
+		  
+			// Se algum filtro estiver preenchido, faz a busca filtrada
+			if (filtrosPreenchidos) {
+				this.filtrarCampos();
+			  this.emprestimoService.findByFilter(
+				this.dataRetirada, this.dataDevolucao, this.situacao, this.ra, this.usuario, this.patrimonio
+			  ).subscribe(emprestimos => {
+				const dadosFormatados = emprestimos.map((e: any) => {
+				  return {
+					'Patrimônio': e.equipamento?.patrimonio || '',
+					'RA': e.aluno?.ra || '',
+					'Nome': e.aluno?.nome || '',
+					'Curso': e.aluno?.curso || '',
+					'Data de Retirada': this.dataService.formatarDataHora(e.dataRetirada),
+					'Data de Devolução': this.dataService.formatarDataHora(e.dataDevolucao)
+				  };
+				});
+		  
+				const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dadosFormatados);
+				const workbook: XLSX.WorkBook = { Sheets: { 'Empréstimos': worksheet }, SheetNames: ['Empréstimos'] };
+				const excelBuffer: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+		  
+				const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+				saveAs(blob, 'relatorio_emprestimos.xlsx');
+			  });
+			} else {
+			  // Se nenhum filtro estiver preenchido, retorna todos os dados
+			  this.emprestimoService.findAll().subscribe(emprestimos => {
+				const dadosFormatados = emprestimos.map((e: any) => {
+				  return {
+					'Patrimônio': e.equipamento?.patrimonio || '',
+					'RA': e.aluno?.ra || '',
+					'Nome': e.aluno?.nome || '',
+					'Curso': e.aluno?.curso || '',
+					'Data de Retirada': this.dataService.formatarDataHora(e.dataRetirada),
+					'Data de Devolução': this.dataService.formatarDataHora(e.dataDevolucao)
+				  };
+				});
+		  
+				const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dadosFormatados);
+				const workbook: XLSX.WorkBook = { Sheets: { 'Empréstimos': worksheet }, SheetNames: ['Empréstimos'] };
+				const excelBuffer: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+		  
+				const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+				saveAs(blob, 'relatorio_emprestimos.xlsx');
+			  });
+			}
+		  }
+		  
 
 
 	limparCampos(){

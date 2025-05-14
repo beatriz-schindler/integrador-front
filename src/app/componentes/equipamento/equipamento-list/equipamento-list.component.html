@@ -31,24 +31,24 @@
                 <div class="filtrosEquipamentos">
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput  type="text" id="modelo" [(ngModel)]="modelo"  name="modelo" class="form-control"/>
+                            <input mdbInput  type="text" id="modelo" [(ngModel)]="modelo" (keydown.enter)="filtrarCampos()"  name="modelo" class="form-control"/>
                             <label mdbLabel class="form-label" for="modelo">Modelo</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput type="text" id="marca" [(ngModel)]="marca" name="marca" class="form-control"/>
+                            <input mdbInput type="text" id="marca" [(ngModel)]="marca" name="marca" (keydown.enter)="filtrarCampos()" class="form-control"/>
                             <label mdbLabel class="form-label" for="marca">Marca</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
                         <mdb-form-control>
-                            <input mdbInput type="text"  id="patrimonio" [(ngModel)]="patrimonio" name="patrimonio" class="form-control"/>
+                            <input mdbInput type="text"  id="patrimonio" [(ngModel)]="patrimonio" name="patrimonio"(keydown.enter)="filtrarCampos()" class="form-control"/>
                             <label mdbLabel class="form-label" for="patrimonio">Patrimônio</label>
                         </mdb-form-control>
                     </div>
                     <div class="inputs">
-                        <select class="form-select" [(ngModel)]="situacao"  name="situacao" aria-label="Default select example">
+                        <select class="form-select" [(ngModel)]="situacao"  name="situacao" (keydown.enter)="filtrarCampos()" aria-label="Default select example">
                             <option value="" disabled selected hidden>Selecione a Situação</option>
                             <option value="Disponível">Disponível</option>
                             <option value="Em Manutenção">Em Manutenção</option>

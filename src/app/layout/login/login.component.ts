@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
   autenticar() {
     this.autenticarService.login(this.login).subscribe({
       next: token => {
-        console.log(token);
         this.autenticarService.addToken(token);
         
         // Exibir Toast de sucesso

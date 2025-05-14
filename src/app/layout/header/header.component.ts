@@ -15,5 +15,4 @@ export class HeaderComponent {
   autenticarService = inject(AutenticarService);
   loginService = inject(LoginService);
 
-
 }
