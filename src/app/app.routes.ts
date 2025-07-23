@@ -10,6 +10,7 @@ import { AlunoListComponent } from './componentes/aluno/aluno-list/aluno-list.co
 import { UsuarioListComponent } from './componentes/usuario/usuario-list/usuario-list.component';
 import { UsuarioFormComponent } from './componentes/usuario/usuario-form/usuario-form.component';
 import { guardaGuard } from './auth/guarda.guard';
+import { AuditComponent } from './componentes/audit/audit.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
@@ -26,5 +27,6 @@ export const routes: Routes = [
         {path: "usuario", component: UsuarioListComponent},
         {path: "usuario/new", component: UsuarioFormComponent},
         {path: "usuario/edit/:id", component: UsuarioFormComponent},
+        {path: "audit", component: AuditComponent}
     ]}
 ];

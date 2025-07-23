@@ -67,4 +67,24 @@ export class DataService {
       
         return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
       }
+
+    converterInputParaLocalDateTime(input: string): string | null {
+        if (!input) return null;
+
+        // Supondo input no formato dd-MM-yyyy
+        const partes = input.split('-');
+        if (partes.length !== 3) return null;
+
+        const dia = Number(partes[0]);
+        const mes = Number(partes[1]) - 1; // JS: meses começam do 0
+        const ano = Number(partes[2]);
+
+        const data = new Date(ano, mes, dia);
+
+        if (isNaN(data.getTime())) return null;
+
+        // Gera string ISO com horas zeradas
+        return data.toISOString().slice(0, 19); // "yyyy-MM-ddTHH:mm:ss"
+    }
+
 }
