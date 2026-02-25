@@ -1,8 +1,8 @@
-export class Auditoria {
-    entidade!: string;
-    id!: number;
-    criadoPor!: string | null;
-    criadoEm!: string | null; // ou Date, conforme seu uso
-    modificadoPor!: string | null;
-    modificadoEm!: string | null;
+export interface Auditoria {
+  entidade: string;
+  id: number;
+  criadoPor: string | null;
+  criadoEm: Date | null;
+  alteradoPor: string | null;
+  alteradoEm: Date | null;
 }
