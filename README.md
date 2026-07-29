@@ -1,27 +1,51 @@
-# IntegradorFront
+# EasyNote
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+Sistema simples para controle de empréstimo de notebooks a alunos, feito para uso por funcionários (ex: laboratório, biblioteca, secretaria).
 
-## Development server
+## Sobre o projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O EasyNote facilita o controle de empréstimo e devolução de notebooks institucionais, vinculando cada empréstimo ao RA (Registro Acadêmico) do aluno e ao número de patrimônio do equipamento.
 
-## Code scaffolding
+## Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Login**
+  - Autenticação do funcionário para acesso ao sistema.
 
-## Build
+- **Cadastro de equipamento**
+  - Cadastro dos notebooks disponíveis, identificados por número de patrimônio.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Cadastro de funcionário**
+  - Cadastro dos funcionários responsáveis por registrar os empréstimos.
 
-## Running unit tests
+- **Iniciar empréstimo**
+  - O aluno informa o **RA**.
+  - O funcionário registra o **número de patrimônio** do notebook.
+  - O sistema inicia o empréstimo, vinculando aluno e equipamento.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Encerrar empréstimo**
+  - O funcionário localiza o empréstimo pelo **número de patrimônio**.
+  - Clica em "Encerrar" para finalizar a devolução.
 
-## Running end-to-end tests
+## Fluxo de uso
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+1. Funcionário faz login no sistema
+2. Aluno informa o RA
+3. Funcionário digita o número de patrimônio do notebook
+4. Funcionário clica em "Iniciar" -> empréstimo é registrado
+   ...
+5. Na devolução: funcionário busca o número de patrimônio
+6. Funcionário clica em "Encerrar" -> empréstimo é finalizado
+```
 
-## Further help
+## Tecnologias utilizadas
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Frontend:** Angular
+- **Backend:** Spring Boot (Java 17)
+- **Banco de dados:** MySQL
+
+## Contato
+
+- [Davi Sobreira](https://www.linkedin.com/in/davi-sobreira)
+- [Beatriz Schindler](https://www.linkedin.com/in/beatriz-schindler-b26476363/?locale=pt)
+- [João Girardi](https://www.linkedin.com/in/joao-girardi/)
