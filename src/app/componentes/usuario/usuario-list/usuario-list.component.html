@@ -67,12 +67,17 @@
                     </thead>
                     <tbody>
                         @for (usuario of lista; track $index) {
-                            @if (usuario.ativo == true) {
+                            
                                 <tr>
                                     <td>{{usuario.nome}}</td>
                                     <td>{{usuario.cpf}}</td>
                                     <td>{{usuario.role}}</td>
-                                    <td>ATIVO</td>
+                                    @if(usuario.ativo == true){
+                                        <td>ATIVO</td>
+                                    }@else {
+                                        <td>DESATIVADO</td>
+                                    }
+                                    
                                                                    
                                     <td class="alinharBotoes">
                                         <a href="admin/usuario/edit/{{usuario.id}}" class="btn btn-warning">
@@ -81,7 +86,7 @@
                                         <a class="btn btn-danger" (click)="desativar(usuario.id)"><i class="bi bi-x-octagon"></i></a>
                                     </td>   
                                 </tr>
-                            }  
+                            
                         }
                     </tbody>
                   </table>

@@ -70,6 +70,7 @@ export class EquipamentoService {
     // }
 
     update(equipamento: Equipamentos): Observable<string>{
+        console.log(equipamento)
         return this.http.put<string>(this.API+"/update/"+equipamento.id, equipamento, {responseType: 'text' as 'json'});
     }
 

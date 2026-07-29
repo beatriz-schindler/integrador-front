@@ -28,6 +28,7 @@ export class EmprestimoService {
 
 
     save(emprestimo: Emprestimos): Observable<string>{
+        console.log(emprestimo);
         return this.http.post<string>(this.API+"/save", emprestimo, {responseType: 'text' as 'json'});
     }
 

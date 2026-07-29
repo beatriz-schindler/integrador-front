@@ -21,6 +21,7 @@ export class UsuarioService {
     }
 
     save(usuario: Usuarios): Observable<string>{
+        console.log(usuario);
         return this.http.post<string>(this.API+"/save", usuario, {responseType: 'text' as 'json'});
     }
 

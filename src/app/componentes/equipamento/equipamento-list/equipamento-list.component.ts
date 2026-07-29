@@ -87,6 +87,52 @@ export class EquipamentoListComponent {
     });
   }
 
+  reativar(patrimonio:string){
+      const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+  
+    // Mostra o alerta antes de deletar
+    swalWithBootstrapButtons.fire({
+      title: "Tem certeza que deseja reativar este equipamento?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true
+    }).then((result) => {
+      // Se confirmado, chama o serviço de deleção
+      if (result.isConfirmed) {
+        this.equipamentoService.reativar(patrimonio).subscribe({
+          next: mensagem => {
+            console.log(mensagem);
+            console.log(JSON.stringify(mensagem));
+            swalWithBootstrapButtons.fire({
+              title: "Pronto!",
+              text: typeof mensagem === 'string' ? mensagem : JSON.stringify(mensagem), // Verifica se é string
+              icon: "success"
+            });
+            this.loadPage(); // Atualiza a lista de equipamentos após a exclusão
+          },
+          error: erro => {
+            Swal.fire("Erro", erro.error, 'error'); // Trata erros ao tentar excluir
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Mostra mensagem de cancelamento
+        swalWithBootstrapButtons.fire({
+          title: "Ação cancelada",
+          text: "O equipamento não foi reativado.",
+          icon: "warning"
+        });
+      }
+    });
+    }
+
   limparCampos() {
     this.modelo = '';
     this.marca = '';
