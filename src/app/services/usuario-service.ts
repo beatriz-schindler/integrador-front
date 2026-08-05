@@ -33,4 +33,8 @@ export class UsuarioService {
         return this.http.put<string>(`${this.API}/delete?id=${id}`, {}, {responseType: 'text' as 'json'})
     }
 
+    reativar(id: number): Observable<string>{
+        return this.http.put<string>(`${this.API}/reativar?id=${id}`, {}, {responseType: 'text' as 'json'})
+    }
+
 }

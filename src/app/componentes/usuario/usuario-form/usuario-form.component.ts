@@ -62,10 +62,6 @@ export class UsuarioFormComponent {
     });
   }
 
-  reativar(){
-
-  }
-
   update(){
     this.usuarioService.update(this.usuario).subscribe({
       next: mensagem => {
