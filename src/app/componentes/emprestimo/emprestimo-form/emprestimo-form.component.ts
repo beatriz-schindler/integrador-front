@@ -91,7 +91,7 @@ export class EmprestimoFormComponent {
   
 
   resetAlunoFields() {
-    this.aluno = { ra: '', nome: '', curso: '', ativo: 0};
+    this.aluno = { id: 0, ra: '', nome: '', curso: '', ativo: 0};
   }
 
   findEquipamentoByPatrimonio() {

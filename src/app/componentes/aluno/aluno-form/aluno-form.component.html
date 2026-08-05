@@ -1,0 +1,48 @@
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{tituloComponente}}</h3>
+                    <br>
+                    <form #newEquipamento="ngForm">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="alunoNome" name="alunoNome" class="form-control" required [(ngModel)]="aluno.nome"/>
+                            <label mdbLabel class="form-label" for="alunoNome">Nome</label>
+                        </mdb-form-control>
+                        <br>
+                        <div class="camposMesmaLinha">
+                            <div class="campo1">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="ra" name="ra" class="form-control" required [(ngModel)]="aluno.ra"/>
+                                    <label mdbLabel class="form-label" for="ra">RA</label>
+                                </mdb-form-control>
+                            </div>
+                            <div class="campo2">
+                                <mdb-form-control>
+                                    <input mdbInput type="text" id="curso" [(ngModel)]="aluno.curso" required name="curso" class="form-control"/>
+                                    <label mdbLabel class="form-label" for="curso">Curso</label>
+                                </mdb-form-control>
+                            </div>
+                        </div>
+                        <br>
+
+                        @if(aluno.id == 0){
+                            <button [disabled]="!newEquipamento.valid" (click)="save()" class="btn btn-primary">Salvar</button>
+                        }@else if (aluno.ativo == 0) {
+                            <button [disabled]="!newEquipamento.valid" (click)="reativar()" class="btn btn-primary">Reativar</button>
+                        }
+                        @else{
+                            <button [disabled]="!newEquipamento.valid" (click)="update()" class="btn btn-primary">Atualizar</button>
+                        }
+                        
+                        <a href="admin/aluno" class="btn btn-primary">Voltar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

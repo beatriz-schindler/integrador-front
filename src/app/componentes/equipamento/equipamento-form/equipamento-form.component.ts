@@ -114,7 +114,9 @@ export class EquipamentoFormComponent {
   
   if (dataParaSalvar) {
     this.equipamento.dataAquisicao = dataParaSalvar;
+    console.log(this.equipamento)
     this.equipamentoService.update(this.equipamento).subscribe({
+      
       next: mensagem => {
         Swal.fire({
           title: mensagem,

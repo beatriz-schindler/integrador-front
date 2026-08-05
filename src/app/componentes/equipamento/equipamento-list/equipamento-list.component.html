@@ -5,28 +5,28 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                <div class="headerDashboard">
-                    <div class="card-title">
-                        <div class="header">
-                            <div class="title">Equipamentos</div>
-                            <ul>
-                                @if(loginService.hasPermission("Admin")){
-                                <li>Clique para adicionar, editar ou excluir</li>
-                                }
-                                <li>Clique no ícone da lupa para buscar o que deseja </li> 
-                                <li>Selecione quantos itens deseja visualizar por página</li>
-                            </ul>
+                    <div class="headerDashboard">
+                        <div class="card-title">
+                            <div class="header">
+                                <div class="title">Equipamentos</div>
+                                <ul>
+                                    @if(loginService.hasPermission("Admin")){
+                                    <li>Clique para adicionar, editar ou excluir</li>
+                                    }
+                                    <li>Clique no ícone da lupa para buscar o que deseja </li> 
+                                    <li>Selecione quantos itens deseja visualizar por página</li>
+                                </ul>
+                            </div>
                         </div>
+                        @if(loginService.hasPermission("Admin")){
+                            <div class="botaoNovoEquipamento">
+                                <a href="admin/equipamento/new" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle-fill"></i>
+                                    Novo
+                                </a>
+                            </div> 
+                        }   
                     </div>
-                    @if(loginService.hasPermission("Admin")){
-                        <div class="botaoNovoEquipamento">
-                            <a href="admin/equipamento/new" class="btn btn-primary">
-                                <i class="bi bi-plus-circle-fill"></i>
-                                Novo
-                            </a>
-                        </div> 
-                    }   
-                </div>
                 <hr>
                 <div class="filtrosEquipamentos">
                     <div class="inputs">

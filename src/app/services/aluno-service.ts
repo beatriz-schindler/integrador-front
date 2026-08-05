@@ -28,14 +28,34 @@ export class AlunoService {
         return this.http.get<Alunos>(`${this.API}/findByRa?ra=${ra}`);
     }
 
+    findById(id: number): Observable<Alunos>{
+        return this.http.get<Alunos>(this.API+"/findById/"+id);
+    }
+
     findByFilter(ra: string, nome: string, curso: string): Observable<Alunos[]>{
-            
-            let httpParams = new HttpParams()
-            .set('ra', ra)
-            .set('nome', nome)
-            .set('curso', curso);
-            
-            return this.http.get<Alunos[]>(`${this.API}/findByFilter`, { params: httpParams });
-        }
+        
+        let httpParams = new HttpParams()
+        .set('ra', ra)
+        .set('nome', nome)
+        .set('curso', curso);
+        
+        return this.http.get<Alunos[]>(`${this.API}/findByFilter`, { params: httpParams });
+    }
+
+    save(aluno: Alunos): Observable<string>{
+        return this.http.post<string>(this.API+"/save", aluno, {responseType: 'text' as 'json'});
+    }
+
+    update(aluno: Alunos): Observable<string>{
+        return this.http.put<string>(this.API+"/update/"+aluno.id, aluno, {responseType: 'text' as 'json'});
+    }
+
+    desativar(ra: string): Observable<string>{
+        return this.http.put<string>(`${this.API}/desativarAluno?ra=${ra}`, {}, {responseType: 'text' as 'json'})
+    }
+
+    reativar(ra: string): Observable<string>{
+        return this.http.put<string>(`${this.API}/reativarAluno?ra=${ra}`, {}, {responseType: 'text' as 'json'})
+    }
 
 }
