@@ -31,8 +31,6 @@
 
                         @if(aluno.id == 0){
                             <button [disabled]="!newEquipamento.valid" (click)="save()" class="btn btn-primary">Salvar</button>
-                        }@else if (aluno.ativo == 0) {
-                            <button [disabled]="!newEquipamento.valid" (click)="reativar()" class="btn btn-primary">Reativar</button>
                         }
                         @else{
                             <button [disabled]="!newEquipamento.valid" (click)="update()" class="btn btn-primary">Atualizar</button>
