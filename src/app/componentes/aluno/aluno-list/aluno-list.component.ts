@@ -4,6 +4,7 @@ import { AlunoService } from '../../../services/aluno-service';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-aluno-list',
@@ -13,8 +14,8 @@ import Swal from 'sweetalert2';
   styleUrl: './aluno-list.component.scss'
 })
 export class AlunoListComponent {
-
-  lista: Alunos[] = [];
+	loginService = inject(LoginService);
+  	lista: Alunos[] = [];
 
   // Variáveis de paginação
 	currentPage: number = 1; // Página atual (começa em 1 para o usuário)
@@ -85,19 +86,112 @@ export class AlunoListComponent {
  }
 
  filtrarCampos() {
-		this.alunoService.findByFilter(
-			this.ra, this.nome, this.curso).subscribe({
-			next: (list: Alunos[]) => {
-				this.lista = list;
-				this.currentPage = 1; // Reinicia a paginação
-				this.totalPages = 1; // Garante que tudo será exibido em uma única página
+	this.alunoService.findByFilter(
+		this.ra, this.nome, this.curso).subscribe({
+		next: (list: Alunos[]) => {
+			this.lista = list;
+			this.currentPage = 1; // Reinicia a paginação
+			this.totalPages = 1; // Garante que tudo será exibido em uma única página
+		},
+		error: (erro) => {
+			console.log(erro);
+			Swal.fire("Erro", erro.error, 'error');
+		}
+	});
+}
+
+desativar(ra: string){
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+		confirmButton: "btn btn-success",
+		cancelButton: "btn btn-danger"
+		},
+		buttonsStyling: false
+	});
+	
+	// Mostra o alerta antes de deletar
+	swalWithBootstrapButtons.fire({
+		title: "Tem certeza que deseja desativar este aluno?",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Sim",
+		cancelButtonText: "Cancelar",
+		reverseButtons: true
+	}).then((result) => {
+		// Se confirmado, chama o serviço de deleção
+		if (result.isConfirmed) {
+		this.alunoService.desativar(ra).subscribe({
+			next: mensagem => {
+			console.log(mensagem);
+			console.log(JSON.stringify(mensagem));
+			swalWithBootstrapButtons.fire({
+				title: "Pronto!",
+				text: typeof mensagem === 'string' ? mensagem : JSON.stringify(mensagem), // Verifica se é string
+				icon: "success"
+			});
+			this.loadPage(); // Atualiza a lista de equipamentos após a exclusão
 			},
-			error: (erro) => {
-				console.log(erro);
-				Swal.fire("Erro", erro.error, 'error');
+			error: erro => {
+			Swal.fire("Erro", erro.error, 'error'); // Trata erros ao tentar excluir
 			}
 		});
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+		// Mostra mensagem de cancelamento
+		swalWithBootstrapButtons.fire({
+			title: "Ação cancelada",
+			text: "O aluno não foi desativado.",
+			icon: "warning"
+		});
+		}
+	});
+}
+
+reativar(ra:string){
+	  const swalWithBootstrapButtons = Swal.mixin({
+	  customClass: {
+		confirmButton: "btn btn-success",
+		cancelButton: "btn btn-danger"
+	  },
+	  buttonsStyling: false
+	});
+  
+	// Mostra o alerta antes de deletar
+	swalWithBootstrapButtons.fire({
+	  title: "Tem certeza que deseja reativar este aluno?",
+	  icon: "warning",
+	  showCancelButton: true,
+	  confirmButtonText: "Sim",
+	  cancelButtonText: "Cancelar",
+	  reverseButtons: true
+	}).then((result) => {
+	  // Se confirmado, chama o serviço de deleção
+	  if (result.isConfirmed) {
+		this.alunoService.reativar(ra).subscribe({
+		  next: mensagem => {
+			console.log(mensagem);
+			console.log(JSON.stringify(mensagem));
+			swalWithBootstrapButtons.fire({
+			  title: "Pronto!",
+			  text: typeof mensagem === 'string' ? mensagem : JSON.stringify(mensagem), // Verifica se é string
+			  icon: "success"
+			});
+			this.loadPage(); // Atualiza a lista de equipamentos após a exclusão
+		  },
+		  error: erro => {
+			Swal.fire("Erro", erro.error, 'error'); // Trata erros ao tentar excluir
+		  }
+		});
+	  } else if (result.dismiss === Swal.DismissReason.cancel) {
+		// Mostra mensagem de cancelamento
+		swalWithBootstrapButtons.fire({
+		  title: "Ação cancelada",
+		  text: "O aluno não foi reativado.",
+		  icon: "warning"
+		});
+	  }
+	});
 	}
+
 
 	limparCampos(){
 		this.ra = '';

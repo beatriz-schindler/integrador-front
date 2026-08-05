@@ -28,7 +28,7 @@
     margin-top: 8vh;
 }
 
-.filtrosEquipamentos{
+.filtrosAlunos{
     display: flex;
     justify-content: left;
 }
@@ -49,6 +49,9 @@
     border: none; /* Remove a borda para manter a forma quadrada */
     box-shadow: 0px 5px 0px 0px #191A23; /* Cor ao passar o mouse, ajuste conforme necessário */
 }
+.headerDashboard {
+    display: flex;
+}
 
 .alinharBotoes {
     text-align: right;
@@ -67,6 +70,14 @@
     margin-right: 2px;
 }
 
+.botaoNovoAluno {
+    // width: 10%;
+    height: 35px; /* Altura do botão */
+    display: flex;
+    justify-content: flex-end; 
+    margin-left: auto;
+    //margin-left: 10vh;
+}
 
 /* Estilos para os botões de paginação */
 .pagination .page-link {

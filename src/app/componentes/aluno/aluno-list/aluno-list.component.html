@@ -5,47 +5,56 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                    <div class="card-title">
-                        <div class="header">
-                            <div class="title">Alunos</div>
-                            <ul>
-                                <li>Alunos da UniAmérica</li>  
-                            </ul>
+                    <div class="headerDashboard">
+                        <div class="card-title">
+                            <div class="header">
+                                <div class="title">Alunos</div>
+                                <ul>
+                                    <li>Alunos da UniAmérica</li>  
+                                </ul>
+                            </div>
                         </div>
+                        
+                        <div class="botaoNovoAluno">
+                            <a href="admin/aluno/new" class="btn btn-primary">
+                                <i class="bi bi-plus-circle-fill"></i>
+                                Novo 
+                            </a>
+                        </div> 
                     </div>
-                    <hr>
-
-                    <div class="filtrosEquipamentos">
-                        <div class="inputs">
-                            <mdb-form-control>
-                                <input mdbInput  type="text" id="ra" [(ngModel)]="ra"  name="ra" class="form-control"/>
-                                <label mdbLabel class="form-label" for="ra">RA</label>
-                            </mdb-form-control>
-                        </div>
-                        <div class="inputs">
-                            <mdb-form-control>
-                                <input mdbInput type="text" id="nome" [(ngModel)]="nome" name="nome" class="form-control"/>
-                                <label mdbLabel class="form-label" for="nome">Nome</label>
-                            </mdb-form-control>
-                        </div>
-                        <div class="inputs">
-                            <mdb-form-control>
-                                <input mdbInput type="text"  id="curso" [(ngModel)]="curso" name="curso" class="form-control"/>
-                                <label mdbLabel class="form-label" for="curso">Curso</label>
-                            </mdb-form-control>
-                        </div>
-                        <div class="inputs">
-                            <div class="page-size-filter">
-                                <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()" class="form-select">
-                                @for (size of pageSizeOptions; track $index) {
-                                    <option [value]="size">{{ size }}</option>
-                                }
-                                </select>
-                            </div>  
-                        </div>
-                        <a class="btn btn-primary" (click)="filtrarCampos()"><i class="bi bi-search"></i></a>
-                        <a class="btn btn-primary" (click)="limparCampos()"><i class="bi bi-x-circle"></i></a>
+                
+                <hr>
+                <div class="filtrosAlunos">
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput  type="text" id="ra" [(ngModel)]="ra"  name="ra" class="form-control"/>
+                            <label mdbLabel class="form-label" for="ra">RA</label>
+                        </mdb-form-control>
                     </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text" id="nome" [(ngModel)]="nome" name="nome" class="form-control"/>
+                            <label mdbLabel class="form-label" for="nome">Nome</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <mdb-form-control>
+                            <input mdbInput type="text"  id="curso" [(ngModel)]="curso" name="curso" class="form-control"/>
+                            <label mdbLabel class="form-label" for="curso">Curso</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="inputs">
+                        <div class="page-size-filter">
+                            <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()" class="form-select">
+                            @for (size of pageSizeOptions; track $index) {
+                                <option [value]="size">{{ size }}</option>
+                            }
+                            </select>
+                        </div>  
+                    </div>
+                    <a class="btn btn-primary" (click)="filtrarCampos()"><i class="bi bi-search"></i></a>
+                    <a class="btn btn-primary" (click)="limparCampos()"><i class="bi bi-x-circle"></i></a>
+                </div>
                 <br>
                   <table class="table table-striped table-hover">
                     <thead>
@@ -66,7 +75,18 @@
                                     <td>ATIVO</td>
                                 }@else {
                                     <td>INATIVO</td>
-                                } 
+                                }
+                                <td class="alinharBotoes">
+                                        @if (aluno.ativo == 0) {
+                                            <a class="btn btn-primary" (click)="reativar(aluno.ra)"><i class="bi bi-arrow-clockwise"></i></a>
+                                        }@else {
+                                        <a href="admin/aluno/edit/{{aluno.id}}"  class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+
+                                        <a class="btn btn-danger" (click)="desativar(aluno.ra)"><i class="bi bi-x-octagon"></i></a>
+                                    }
+                                </td> 
                             </tr>
                         }
                     </tbody>
@@ -100,5 +120,5 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-</div>
+
 
