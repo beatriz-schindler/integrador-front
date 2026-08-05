@@ -40,6 +40,7 @@ export class AlunoListComponent {
 		// Ajuste apenas para a chamada da API
 		const pageToSend = this.currentPage - 1;
 		
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		this.alunoService.findAllPage(pageToSend, this.pageSize).subscribe((data: any) => {
 			this.lista = data.content;
 			this.totalItems = data.totalElements;
@@ -73,13 +74,12 @@ export class AlunoListComponent {
 	  }
 
   findAll(){
-
     this.alunoService.findAll().subscribe({
         next: list => { //Equivalente ao TRy
             this.lista = list;
         },
         error: erro => { // Equivalente ao CATCH ou EXCEPTIONS
-            alert("Deu erro!");
+            alert("Deu erro!"+erro);
         }
     })
 

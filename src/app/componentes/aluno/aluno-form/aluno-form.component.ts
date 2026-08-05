@@ -31,7 +31,7 @@ export class AlunoFormComponent {
   datePipe = inject(DatePipe);
 
   constructor(){
-    let id = this.rotaAtivada.snapshot.params['id'];
+    const id = this.rotaAtivada.snapshot.params['id'];
     if(id > 0){
       this.tituloComponente = "Editar Aluno";
       this.findById(id);

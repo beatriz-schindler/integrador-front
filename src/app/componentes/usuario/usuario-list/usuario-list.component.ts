@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { Usuario } from '../../../auth/usuario';
 import { Usuarios } from '../../../models/usuarios';
 import { UsuarioService } from '../../../services/usuario-service';
 import Swal from 'sweetalert2';

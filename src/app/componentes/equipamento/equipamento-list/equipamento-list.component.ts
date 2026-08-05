@@ -39,6 +39,7 @@ export class EquipamentoListComponent {
     // Ajuste apenas para a chamada da API
     const pageToSend = this.currentPage - 1;
     
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.equipamentoService.findAllPage(pageToSend, this.pageSize).subscribe((data: any) => {
         this.lista = data.content;
         this.totalItems = data.totalElements;
@@ -75,6 +76,7 @@ export class EquipamentoListComponent {
   filtrarCampos() {
     this.currentPage = 1; // Sempre voltar para a primeira página ao filtrar
     this.equipamentoService.findByFilter(this.situacao, this.patrimonio, this.modelo, this.marca).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         this.lista = response.content || response;
         this.totalItems = response.totalElements || response.length;

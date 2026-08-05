@@ -1,18 +1,17 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Emprestimos } from '../../../models/emprestimos';
 import { EmprestimoService } from '../../../services/emprestimo-service';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
-import * as html2pdf from 'html2pdf.js';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { DataService } from '../../../services/data-service';
 import { LoginService } from '../../../auth/login.service';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
-import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+
 
 @Component({
 	selector: 'app-emprestimo-list',
@@ -52,6 +51,7 @@ export class EmprestimoListComponent {
 		// Ajuste apenas para a chamada da API
 		const pageToSend = this.currentPage - 1;
 		
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		this.emprestimoService.findAllPage(pageToSend, this.pageSize).subscribe((data: any) => {
 			this.lista = data.content;
 			this.totalItems = data.totalElements;
@@ -142,29 +142,6 @@ export class EmprestimoListComponent {
 			}
 		});
 	}
-	  
-
-	/*exportarParaXLSX() {
-		this.emprestimoService.findAll().subscribe(emprestimos => {
-		  const dadosFormatados = emprestimos.map((e: any) => {
-			return {
-			  'Patrimônio': e.equipamento?.patrimonio || '',
-			  'RA': e.aluno?.ra || '',
-			  'Nome': e.aluno?.nome || '',
-			  'Curso': e.aluno?.curso || '',
-			  'Data de Retirada': this.dataService.formatarDataHora(e.dataRetirada),
-			  'Data de Devolução': this.dataService.formatarDataHora(e.dataDevolucao)
-			};
-		  });
-	  
-		  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dadosFormatados);
-		  const workbook: XLSX.WorkBook = { Sheets: { 'Empréstimos': worksheet }, SheetNames: ['Empréstimos'] };
-		  const excelBuffer: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-	  
-		  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-		  saveAs(blob, 'relatorio_emprestimos.xlsx');
-		});
-	  }*/
 
 		exportarParaXLSX() {
 			// Verifica se algum campo de filtro está preenchido
@@ -176,6 +153,7 @@ export class EmprestimoListComponent {
 			  this.emprestimoService.findByFilter(
 				this.dataRetirada, this.dataDevolucao, this.situacao, this.ra, this.usuario, this.patrimonio
 			  ).subscribe(emprestimos => {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				const dadosFormatados = emprestimos.map((e: any) => {
 				  return {
 					'Patrimônio': e.equipamento?.patrimonio || '',
@@ -197,6 +175,7 @@ export class EmprestimoListComponent {
 			} else {
 			  // Se nenhum filtro estiver preenchido, retorna todos os dados
 			  this.emprestimoService.findAll().subscribe(emprestimos => {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				const dadosFormatados = emprestimos.map((e: any) => {
 				  return {
 					'Patrimônio': e.equipamento?.patrimonio || '',
