@@ -1,3 +1,3 @@
 export const environment = {
-    API: "http://localhost:8081"
-}
+    API: "http://easynote:8082"
+    }
