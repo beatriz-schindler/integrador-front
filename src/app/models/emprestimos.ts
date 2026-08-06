@@ -6,10 +6,10 @@ export class Emprestimos {
     id!: number;
     aluno!: Alunos;
     equipamento!: Equipamentos;
-    observacao: string = '';
+    observacao = '';
     usuario!: Usuarios;
     dataRetirada!: Date;
     dataDevolucao!: Date;
-    situacao: string = '';
+    situacao = '';
 }
 

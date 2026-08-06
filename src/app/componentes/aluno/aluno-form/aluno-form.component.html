@@ -29,7 +29,7 @@
                         </div>
                         <br>
 
-                        @if(aluno.id == 0){
+                        @if(aluno.id === 0){
                             <button [disabled]="!newEquipamento.valid" (click)="save()" class="btn btn-primary">Salvar</button>
                         }
                         @else{

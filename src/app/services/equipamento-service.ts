@@ -52,7 +52,7 @@ export class EquipamentoService {
 
     findByFilter(situacao: string, patrimonio: string, modelo: string, marca: string): Observable<Equipamentos[]>{
         
-        let httpParams = new HttpParams()
+        const httpParams = new HttpParams()
         .set('situacao', situacao)
         .set('patrimonio', patrimonio)
         .set('modelo', modelo)

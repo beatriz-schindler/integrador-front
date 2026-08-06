@@ -18,16 +18,16 @@ export class AlunoListComponent {
   	lista: Alunos[] = [];
 
   // Variáveis de paginação
-	currentPage: number = 1; // Página atual (começa em 1 para o usuário)
-	pageSize: number = 10; // Itens por página
-	totalItems: number = 0; // Total de itens
-	totalPages: number = 0; // Total de páginas
-	pageSizeOptions: number[] = [5, 10, 25, 50, 100, 250, 500];
+	currentPage = 1; // Página atual (começa em 1 para o usuário)
+	pageSize = 10; // Itens por página
+	totalItems = 0; // Total de itens
+	totalPages = 0; // Total de páginas
+	pageSizeOptions = [5, 10, 25, 50, 100, 250, 500];
 
 	//Variáveis de Filtro
-	ra: string = '';
-	curso: string = '';
-	nome: string = '';
+	ra = '';
+	curso = '';
+	nome = '';
 
 
   alunoService = inject(AlunoService);

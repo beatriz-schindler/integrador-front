@@ -41,13 +41,13 @@
                                     <td>{{usuario.nome}}</td>
                                     <td>{{usuario.cpf}}</td>
                                     <td>{{usuario.role}}</td>
-                                    @if(usuario.ativo == true){
+                                    @if(usuario.ativo === true){
                                         <td>ATIVO</td>
                                     }@else {
                                         <td>DESATIVADO</td>
                                     }
                                     <td class="alinharBotoes">
-                                        @if (usuario.ativo == false) {
+                                        @if (usuario.ativo === false) {
                                                 <a class="btn btn-primary" (click)="reativar(usuario.id)"><i class="bi bi-arrow-clockwise"></i></a>
                                             }@else {
                                                 <a href="admin/usuario/edit/{{usuario.id}}" class="btn btn-warning">

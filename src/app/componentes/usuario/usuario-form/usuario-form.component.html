@@ -36,7 +36,7 @@
                                 </mdb-form-control>
                             </div>
                             <div class="campo2">
-                                @if(usuario.id == null){
+                                @if(usuario.id === null){
                                     <mdb-form-control>
                                         <input mdbInput type="password" id="senha" name="senha" class="form-control" required [(ngModel)]="usuario.senha"/>
                                         <label mdbLabel class="form-label" for="senha">Senha</label>
@@ -51,7 +51,7 @@
                             </div>
                         <br>
 
-                        @if(usuario.id == 0){
+                        @if(usuario.id === 0){
                             <button [disabled]="!newUsuario.valid" (click)="save()" class="btn btn-primary">Salvar</button>
                         }
                         @else{

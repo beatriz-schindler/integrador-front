@@ -19,9 +19,9 @@ import Swal from 'sweetalert2';
   providers: [DatePipe, provideNgxMask()]
 })
 export class AlunoFormComponent {
-  tituloComponente: string = "Novo Aluno"; 
+  tituloComponente = "Novo Aluno"; 
   aluno: Alunos = new Alunos();
-  situacaoAtual: string = '';
+  situacaoAtual = '';
   alunoService: AlunoService = new AlunoService();
   
 

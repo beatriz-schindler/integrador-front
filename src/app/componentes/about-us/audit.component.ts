@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Auditoria } from '../../models/auditoria';
 import { AuditoriaService } from '../../services/auditoria-service';
 import { DataService } from '../../services/data-service';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective } from 'ngx-mask';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 
@@ -26,11 +26,11 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 export class AuditComponent implements OnInit {
 
   // Filtros
-  entidade: string = '';
-  createdBy: string = '';
-  lastModifiedBy: string = '';
-  modifiedDate1: string = '';
-  modifiedDate2: string = '';
+  entidade = '';
+  createdBy = '';
+  lastModifiedBy = '';
+  modifiedDate1 = '';
+  modifiedDate2 = '';
 
   // Paginação
   currentPage: number = 1;

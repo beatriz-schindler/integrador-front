@@ -17,7 +17,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 })
 export class UsuarioFormComponent {
 
-  tituloComponente: string = "Novo Usuário";
+  tituloComponente = "Novo Usuário";
   router = inject(Router);
   rotaAtivada = inject(ActivatedRoute);
   usuarioService = inject(UsuarioService);

@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -47,8 +48,9 @@
     "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.0",
     "@types/moment": "^2.11.29",
+    "angular-eslint": "18.4.3",
     "cypress": "^14.5.2",
-    "eslint": "^9.39.5",
+    "eslint": "^9.15.0",
     "globals": "^17.9.0",
     "jasmine-core": "~5.2.0",
     "jiti": "^2.7.0",

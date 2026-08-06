@@ -26,7 +26,7 @@ export class EmprestimoFormComponent {
   aluno: Alunos = new Alunos();
   equipamento: Equipamentos = new Equipamentos();
   usuario!: Usuarios | null;
-  emprestimoEncontrado: boolean = false;
+  emprestimoEncontrado = false;
 
   emprestimoService = inject(EmprestimoService);
   alunoService = inject(AlunoService);

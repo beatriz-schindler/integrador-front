@@ -56,7 +56,7 @@ export class EmprestimoService {
         const dataRetiradaFormatada = dataRetirada ? this.dataService.formatarDataParaSalvar(dataRetirada) : '';
         const dataDevolucaoFormatada = dataDevolucao ? this.dataService.formatarDataParaSalvar(dataDevolucao) : '';
       
-        let httpParams = new HttpParams()
+        const httpParams = new HttpParams()
           .set('dataRetirada', dataRetiradaFormatada)
           .set('dataDevolucao', dataDevolucaoFormatada)
           .set('situacao', situacao || '')

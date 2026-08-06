@@ -19,9 +19,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class EquipamentoFormComponent {
 
-  tituloComponente: string = "Novo Equipamento"; 
+  tituloComponente = "Novo Equipamento"; 
   equipamento: Equipamentos = new Equipamentos();
-  situacaoAtual: string = '';
+  situacaoAtual = '';
   
 
   router = inject(Router);
