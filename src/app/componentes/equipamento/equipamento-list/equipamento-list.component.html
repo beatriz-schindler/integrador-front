@@ -91,7 +91,7 @@
                                 <td>{{equipamento.observacao}}</td>
                                 @if(loginService.hasPermission("Admin")){
                                     <td class="alinharBotoes">
-                                        @if (equipamento.situacao == "Desativado") {
+                                        @if (equipamento.situacao === "Desativado") {
                                             <a class="btn btn-primary" (click)="reativar(equipamento.patrimonio)"><i class="bi bi-arrow-clockwise"></i></a>
                                         }@else {
                                         <a href="admin/equipamento/edit/{{equipamento.id}}" class="btn btn-warning">

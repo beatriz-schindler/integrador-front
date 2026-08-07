@@ -10,9 +10,7 @@ import { EquipamentoService } from '../../../services/equipamento-service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario-service';
-import { Login } from '../../../models/login';
 import { Usuarios } from '../../../models/usuarios';
-import { LoginComponent } from '../../../layout/login/login.component';
 import { AutenticarService } from '../../../services/autenticar-service';
 
 @Component({
@@ -28,7 +26,7 @@ export class EmprestimoFormComponent {
   aluno: Alunos = new Alunos();
   equipamento: Equipamentos = new Equipamentos();
   usuario!: Usuarios | null;
-  emprestimoEncontrado: boolean = false;
+  emprestimoEncontrado = false;
 
   emprestimoService = inject(EmprestimoService);
   alunoService = inject(AlunoService);
@@ -70,6 +68,7 @@ export class EmprestimoFormComponent {
           });
         }
       },
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       error: erro => {
         this.resetAlunoFields();
         Swal.fire({

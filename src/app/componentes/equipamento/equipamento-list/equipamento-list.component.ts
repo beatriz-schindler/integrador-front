@@ -16,17 +16,17 @@ import { LoginService } from '../../../auth/login.service';
 })
 export class EquipamentoListComponent {
   lista: Equipamentos[] = [];
-  situacao: string = '';
-  marca: string = '';
-  modelo: string = '';
-  patrimonio: string = '';
+  situacao = '';
+  marca = '';
+  modelo = '';
+  patrimonio = '';
 
   // Variáveis de paginação
-  currentPage: number = 1; // Página atual (começa em 1 para o usuário)
-  pageSize: number = 10; // Itens por página
-  totalItems: number = 0; // Total de itens
-  totalPages: number = 0; // Total de páginas
-  pageSizeOptions: number[] = [5, 10, 25, 50, 100, 250, 500];
+  currentPage = 1; // Página atual (começa em 1 para o usuário)
+  pageSize = 10; // Itens por página
+  totalItems = 0; // Total de itens
+  totalPages = 0; // Total de páginas
+  pageSizeOptions = [5, 10, 25, 50, 100, 250, 500];
 
   equipamentoService = inject(EquipamentoService);
   loginService = inject(LoginService);
@@ -39,6 +39,7 @@ export class EquipamentoListComponent {
     // Ajuste apenas para a chamada da API
     const pageToSend = this.currentPage - 1;
     
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.equipamentoService.findAllPage(pageToSend, this.pageSize).subscribe((data: any) => {
         this.lista = data.content;
         this.totalItems = data.totalElements;
@@ -75,6 +76,7 @@ export class EquipamentoListComponent {
   filtrarCampos() {
     this.currentPage = 1; // Sempre voltar para a primeira página ao filtrar
     this.equipamentoService.findByFilter(this.situacao, this.patrimonio, this.modelo, this.marca).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         this.lista = response.content || response;
         this.totalItems = response.totalElements || response.length;

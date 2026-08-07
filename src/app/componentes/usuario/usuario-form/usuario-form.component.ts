@@ -5,7 +5,7 @@ import { Usuarios } from '../../../models/usuarios';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-usuario-form',
@@ -17,14 +17,14 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 })
 export class UsuarioFormComponent {
 
-  tituloComponente: string = "Novo Usuário";
+  tituloComponente = "Novo Usuário";
   router = inject(Router);
   rotaAtivada = inject(ActivatedRoute);
   usuarioService = inject(UsuarioService);
   usuario: Usuarios = new Usuarios();
 
   constructor(){
-    let id = this.rotaAtivada.snapshot.params['id'];
+    const id = this.rotaAtivada.snapshot.params['id'];
     if(id > 0){
       this.tituloComponente = "Editar Usuário";
       this.findById(id);
@@ -60,10 +60,6 @@ export class UsuarioFormComponent {
         Swal.fire('Erro', erro.error, 'error');
       }
     });
-  }
-
-  reativar(){
-
   }
 
   update(){

@@ -56,10 +56,8 @@
                         </div>
                         <br>
 
-                        @if(equipamento.id == 0){
+                        @if(equipamento.id === 0){
                             <button [disabled]="!newEquipamento.valid" (click)="save()" class="btn btn-primary">Salvar</button>
-                        }@else if (equipamento.situacao == "Desativado") {
-                            <button [disabled]="!newEquipamento.valid" (click)="reativar()" class="btn btn-primary">Reativar</button>
                         }
                         @else{
                             <button [disabled]="!newEquipamento.valid" (click)="update()" class="btn btn-primary">Atualizar</button>

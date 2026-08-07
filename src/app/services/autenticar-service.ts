@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Usuarios } from '../models/usuarios';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { Observable} from 'rxjs';
 import { UsuarioService } from './usuario-service';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Login } from '../models/login';

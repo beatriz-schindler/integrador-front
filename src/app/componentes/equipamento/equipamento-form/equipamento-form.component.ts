@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Equipamentos } from '../../../models/equipamentos';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EquipamentoService } from '../../../services/equipamento-service';
@@ -19,9 +19,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class EquipamentoFormComponent {
 
-  tituloComponente: string = "Novo Equipamento"; 
+  tituloComponente = "Novo Equipamento"; 
   equipamento: Equipamentos = new Equipamentos();
-  situacaoAtual: string = '';
+  situacaoAtual = '';
   
 
   router = inject(Router);
@@ -30,7 +30,7 @@ export class EquipamentoFormComponent {
   datePipe = inject(DatePipe);
 
   constructor(){
-    let id = this.rotaAtivada.snapshot.params['id'];
+    const id = this.rotaAtivada.snapshot.params['id'];
     if(id > 0){
       this.tituloComponente = "Editar Equipamento";
       this.findById(id);

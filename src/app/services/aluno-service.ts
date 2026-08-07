@@ -3,6 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Alunos } from "../models/alunos";
 import { environment } from "../../environments/environment";
+import { ListFormat } from "typescript";
 
 @Injectable({
     providedIn: "root"
@@ -12,12 +13,12 @@ export class AlunoService {
     http = inject(HttpClient);
     API = environment.API+"/api/alunos";
 
-    // Busca equipamentos paginados
-    findAllPage(page: number, size: number): Observable<any> {
+    // Busca alunos paginados
+    findAllPage(page: number, size: number): Observable<ListFormat> {
         const params = new HttpParams()
         .set('page', page.toString())
         .set('size', size.toString());
-        return this.http.get<any>(`${this.API}/findAllPage`, { params });
+        return this.http.get<ListFormat>(`${this.API}/findAllPage`, { params });
     }
 
     findAll(): Observable<Alunos[]>{
@@ -34,7 +35,7 @@ export class AlunoService {
 
     findByFilter(ra: string, nome: string, curso: string): Observable<Alunos[]>{
         
-        let httpParams = new HttpParams()
+        const httpParams = new HttpParams()
         .set('ra', ra)
         .set('nome', nome)
         .set('curso', curso);

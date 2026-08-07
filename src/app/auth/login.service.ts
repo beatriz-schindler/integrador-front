@@ -35,7 +35,7 @@ export class LoginService {
   }
 
   jwtDecode() {
-    let token = this.getToken();
+    const token = this.getToken();
     if (token) {
       return jwtDecode<JwtPayload>(token);
     }
@@ -43,7 +43,7 @@ export class LoginService {
   }
 
   hasPermission(role: string) {
-    let user = this.jwtDecode() as Usuario;
+    const user = this.jwtDecode() as Usuario;
     if (user.role == role)
       return true;
     else

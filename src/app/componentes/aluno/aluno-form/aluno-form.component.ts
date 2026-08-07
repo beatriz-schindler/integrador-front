@@ -19,9 +19,9 @@ import Swal from 'sweetalert2';
   providers: [DatePipe, provideNgxMask()]
 })
 export class AlunoFormComponent {
-  tituloComponente: string = "Novo Aluno"; 
+  tituloComponente = "Novo Aluno"; 
   aluno: Alunos = new Alunos();
-  situacaoAtual: string = '';
+  situacaoAtual = '';
   alunoService: AlunoService = new AlunoService();
   
 
@@ -31,7 +31,7 @@ export class AlunoFormComponent {
   datePipe = inject(DatePipe);
 
   constructor(){
-    let id = this.rotaAtivada.snapshot.params['id'];
+    const id = this.rotaAtivada.snapshot.params['id'];
     if(id > 0){
       this.tituloComponente = "Editar Aluno";
       this.findById(id);
