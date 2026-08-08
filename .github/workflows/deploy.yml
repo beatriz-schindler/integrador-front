@@ -2,7 +2,7 @@ name: Deploy Frontend AWS
 
 on:
   push:
-    branches: [master, add/GithubActions]
+    branches: [main, master]
   pull_request:
 
 jobs:
