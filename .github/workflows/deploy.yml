@@ -42,4 +42,4 @@ jobs:
         - name: Remove docker container
           run: docker rm -f easynote_backend
         - name: Run docker container
-          run: docker run -d -p 80:80 --name easynote_frontend beatrizschindler/easynote_frontend_image
+          run: docker run -d -p 80:80 --restart unless-stopped --name easynote_frontend beatrizschindler/easynote_frontend_image
