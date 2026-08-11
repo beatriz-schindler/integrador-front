@@ -32,3 +32,14 @@ jobs:
        
       - name: Push image docker
         run: docker push beatrizschindler/easynote_frontend_image
+      
+  deploy:
+      needs: build
+      runs-on: self-hosted
+      steps:
+        - name: Pull image from docker hub
+          run: docker pull beatrizschindler/easynote_frontend_image:latest
+        - name: Remove docker container
+          run: docker rm -f easynote_backend
+        - name: Run docker container
+          run: docker run -d -p 80:80 --name easynote_frontend beatrizschindler/easynote_frontend_image
