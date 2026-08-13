@@ -23,7 +23,7 @@ name: Deploy EasyNote
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, Testando-pipeline ]
   workflow_dispatch:
     inputs:
       tag:
