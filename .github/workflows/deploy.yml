@@ -72,11 +72,11 @@ jobs:
           docker build -t "$ECR_REGISTRY/$BACKEND_REPO:$TAG" ./back/EasyNote-webservice
 
       # Equivalente a: docker build -t easynote-frontend:$Tag ./front/integrador-front
-      - name: Build da imagem do frontend (Angular + Nginx)
-        env:
-          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-        run: |
-          docker build -t "$ECR_REGISTRY/$FRONTEND_REPO:$TAG" ./front/integrador-front
+      #- name: Build da imagem do frontend (Angular + Nginx)
+       # env:
+        #  ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+       # run: |
+        #  docker build -t "$ECR_REGISTRY/$FRONTEND_REPO:$TAG" ./front/integrador-front
 
       # Equivalente a: docker pull mysql:8.0 + docker tag mysql:8.0 $dbImg
       - name: Pull + tag da imagem oficial do MySQL
