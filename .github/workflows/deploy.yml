@@ -76,7 +76,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
         run: |
-          docker build -t "$ECR_REGISTRY/$FRONTEND_REPO:$TAG" ./front/integrador-front
+          docker build -t "$ECR_REGISTRY/$FRONTEND_REPO:$TAG" .
 
       # Equivalente a: docker pull mysql:8.0 + docker tag mysql:8.0 $dbImg
       - name: Pull + tag da imagem oficial do MySQL
