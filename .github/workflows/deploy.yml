@@ -1,0 +1,178 @@
+# .github/workflows/deploy.yaml
+#
+# Pipeline de CI/CD do EasyNote:
+#   1) build-and-push  -> builda as imagens (backend, frontend) e retagueia o mysql:8.0,
+#                         publica as 3 no Amazon ECR (equivalente ao ecr-build-push.ps1)
+#   2) deploy          -> conecta via SSH na EC2 e roda, diretamente na sessão SSH,
+#                         os mesmos comandos do vm-run.sh (login no ECR, pull das 3
+#                         imagens, recriação da rede/containers) — sem depender de um
+#                         arquivo vm-run.sh já existente na instância.
+#
+# Segredos necessários no repositório (Settings > Secrets and variables > Actions):
+#   AWS_ACCESS_KEY_ID       - de um usuário/role IAM com permissão de push no ECR
+#   AWS_SECRET_ACCESS_KEY   - idem
+#   EC2_HOST                - IP público (ou domínio) da instância EC2
+#   EC2_USER                - usuário SSH da instância (ex: ubuntu)
+#   EC2_SSH_KEY             - chave privada SSH (conteúdo do .pem), sem senha
+#
+# Pré-requisito na própria EC2 (não muda com este workflow): a instância precisa
+# conseguir se autenticar no ECR sozinha para o "docker pull" funcionar — via IAM Role
+# anexada à instância, ou via "aws configure" já feito localmente nela.
+
+name: Deploy EasyNote
+
+on:
+  push:
+    branches: [ main, master, Testando-pipeline ]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag das imagens Docker a publicar/rodar"
+        required: false
+        default: "1.0"
+
+env:
+  AWS_REGION: sa-east-1
+  ACCOUNT_ID: "853611856302"
+  BACKEND_REPO: easynote
+  FRONTEND_REPO: front
+  DB_REPO: db
+  # workflow_dispatch permite escolher a tag manualmente; em push normal, usa "1.0"
+  TAG: ${{ github.event.inputs.tag || '1.0' }}
+
+jobs:
+  # ============================================================
+  # JOB 1 — equivalente ao ecr-build-push.ps1
+  # ============================================================
+  build-and-push:
+    name: Build & Push das imagens para o ECR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar credenciais AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Substitui o "aws ecr get-login-password | docker login" do script original —
+      # essa action já faz o login do Docker no registry e devolve a URL do registry.
+      - name: Login no Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Equivalente a: docker build -t easynote-backend:$Tag ./back/EasyNote-webservice
+     # - name: Build da imagem do backend (Spring Boot)
+      #  env:
+       #   ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        #run: |
+        #  docker build -t "$ECR_REGISTRY/$BACKEND_REPO:$TAG" ./back/EasyNote-webservice
+
+      # Equivalente a: docker build -t easynote-frontend:$Tag ./front/integrador-front
+      - name: Build da imagem do frontend (Angular + Nginx)
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker build -t "$ECR_REGISTRY/$FRONTEND_REPO:$TAG" .
+
+      # Equivalente a: docker pull mysql:8.0 + docker tag mysql:8.0 $dbImg
+      - name: Pull + tag da imagem oficial do MySQL
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker pull mysql:8.0
+          docker tag mysql:8.0 "$ECR_REGISTRY/$DB_REPO:$TAG"
+
+      # Equivalente aos 3 "docker push" do final do script original
+      - name: Push das 3 imagens para o ECR
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker push "$ECR_REGISTRY/$BACKEND_REPO:$TAG"
+          docker push "$ECR_REGISTRY/$FRONTEND_REPO:$TAG"
+          docker push "$ECR_REGISTRY/$DB_REPO:$TAG"
+
+  # ============================================================
+  # JOB 2 — conecta na EC2 e roda, na hora, tudo que o vm-run.sh fazia
+  # ============================================================
+  deploy:
+    name: Deploy na EC2 (pull + run dos containers)
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Conectar via SSH e subir os containers na EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          envs: ACCOUNT_ID,AWS_REGION,TAG,BACKEND_REPO,FRONTEND_REPO,DB_REPO
+          script: |
+            set -euo pipefail
+
+            ACCOUNT_ID="$ACCOUNT_ID"
+            REGION="$AWS_REGION"
+            TAG="$TAG"
+            BACKEND_REPO="$BACKEND_REPO"
+            FRONTEND_REPO="$FRONTEND_REPO"
+            DB_REPO="$DB_REPO"
+
+            ECR_BASE="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
+            DB_IMG="$ECR_BASE/$DB_REPO:$TAG"
+            BACKEND_IMG="$ECR_BASE/$BACKEND_REPO:$TAG"
+            FRONTEND_IMG="$ECR_BASE/$FRONTEND_REPO:$TAG"
+
+            echo "==> Login no ECR"
+            aws ecr get-login-password --region "$REGION" | docker login --username AWS --password-stdin "$ECR_BASE"
+
+            echo "==> Pull das imagens"
+            docker pull "$DB_IMG"
+            docker pull "$BACKEND_IMG"
+            docker pull "$FRONTEND_IMG"
+
+            echo "==> Criando rede (se nao existir)"
+            docker network create easynote-net 2>/dev/null || true
+
+            echo "==> Parando/removendo containers antigos (se houver)"
+            docker rm -f easynote-db easynote-backend easynote-frontend 2>/dev/null || true
+
+            echo "==> Subindo banco de dados"
+            docker run -d --name easynote-db \
+              --network easynote-net \
+              --restart unless-stopped \
+              -e MYSQL_ROOT_PASSWORD=root \
+              -e MYSQL_DATABASE=easynote \
+              -v mysql_data:/var/lib/mysql \
+              --innodb-buffer-pool-size=128M \
+              --performance-schema=OFF \
+              "$DB_IMG"
+
+            echo "==> Aguardando o banco ficar saudavel"
+            until docker exec easynote-db mysqladmin ping -h localhost -uroot -proot --silent; do
+              echo "   aguardando mysql..."
+              sleep 3
+            done
+
+            echo "==> Subindo backend"
+            docker run -d --name easynote-backend \
+              --network easynote-net \
+              --restart unless-stopped \
+              -e DB1_HOST=easynote-db \
+              -e DB1_PORT=3306 \
+              -e DB1_NAME=easynote \
+              -e DB1_USER=root \
+              -e DB1_PASS=root \
+              "$BACKEND_IMG"
+
+            echo "==> Subindo frontend (nginx + proxy reverso)"
+            docker run -d --name easynote-frontend \
+              --network easynote-net \
+              -p 80:80 \
+              --restart unless-stopped \
+              "$FRONTEND_IMG"
+
+            echo "==> Pronto!"
+            docker ps --filter "name=easynote-"
